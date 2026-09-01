@@ -1,0 +1,31 @@
+name: Deploy uppgiftssidan to Pages
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - uppgiftssida.html
+      - sources/assets/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+  administration: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare site
+        run: |
+          mkdir -p site
+          cp uppgiftssida.html site/index.html
+          cp -r sources/assets site/assets
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
