@@ -1,0 +1,1349 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ChasHack: uppgiftssidan, v1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap">
+<style>
+  :root {
+    --coal: #28282a;
+    --panel: rgba(46, 46, 50, 0.93);
+    --panel-soft: rgba(255, 255, 255, 0.05);
+    --ink: #f5f3ec;
+    --muted: #bab8af;
+    --line: rgba(255, 255, 255, 0.09);
+    --bubble: #a9dcf6;
+    --sky: #7ec6ec;
+    --orange: #f2a55b;
+    --coral: #ec8a7b;
+    --teal: #7ea896;
+    --lime: #b6d26e;
+    --blue: #4d63ee;
+    --pink: #f06d85;
+    --purple: #c792d8;
+    --olive: #c6b54f;
+    --yellow: #ecd15e;
+    --dark-text: #26262a;
+    --radius: 20px;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--coal) url("sources/assets/chasHack-bg.png") center / cover no-repeat fixed;
+    color: var(--ink);
+    font-family: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(30, 30, 33, 0.87);
+    z-index: -1;
+  }
+
+  body.wall-only::before { background: rgba(30, 30, 33, 0.93); }
+
+  img { display: block; max-width: 100%; }
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.85em;
+    background: var(--panel-soft);
+    padding: 1px 6px;
+    border-radius: 6px;
+  }
+
+  a { color: var(--sky); }
+  a:focus-visible, button:focus-visible, input:focus-visible {
+    outline: 3px solid var(--sky);
+    outline-offset: 2px;
+  }
+
+  button {
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 800;
+    border: 0;
+    border-radius: 999px;
+    padding: 9px 18px;
+    cursor: pointer;
+  }
+
+  .wrap { width: min(1000px, 100% - 36px); margin-inline: auto; }
+
+  /* ---------- topp ---------- */
+
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background: rgba(30, 30, 33, 0.92);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(8px);
+  }
+
+  .topbar-inner {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    padding: 12px 0;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: "Baloo 2", sans-serif;
+    font-weight: 800;
+    font-size: 1.35rem;
+    color: var(--bubble);
+  }
+
+  .logo .shapes { display: flex; gap: 5px; }
+
+  .logo .shapes i { display: block; width: 13px; height: 13px; border-radius: 4px; }
+
+  .logo .shapes i:nth-child(1) { background: var(--orange); transform: rotate(14deg); }
+  .logo .shapes i:nth-child(2) { background: var(--pink); border-radius: 50%; }
+  .logo .shapes i:nth-child(3) { background: var(--lime); transform: rotate(-10deg); }
+
+  .teambox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--muted);
+  }
+
+  .teambox input {
+    width: 150px;
+    padding: 8px 13px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--panel-soft);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+
+  nav.tabs {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding: 0 0 12px;
+  }
+
+  nav.tabs button {
+    background: var(--panel-soft);
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  nav.tabs button[aria-selected="true"] {
+    background: var(--bubble);
+    color: var(--dark-text);
+  }
+
+  main.wrap { padding: 30px 0 80px; }
+
+  section[hidden] { display: none; }
+
+  /* ---------- block: start ---------- */
+
+  .hero {
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    margin-bottom: 24px;
+    max-height: 210px;
+  }
+
+  .hero img { width: 100%; object-fit: cover; }
+
+  h1 {
+    margin: 0 0 10px;
+    font-family: "Baloo 2", sans-serif;
+    font-weight: 800;
+    font-size: clamp(2rem, 5.5vw, 3.1rem);
+    line-height: 1;
+    color: var(--bubble);
+    text-shadow: 0 3px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  .intro { max-width: 68ch; font-size: 1.05rem; }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 22px 0 8px;
+  }
+
+  .stepcard {
+    padding: 18px 20px;
+    border-radius: 16px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+  }
+
+  .step-no {
+    display: inline-grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    font-family: "Baloo 2", sans-serif;
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: var(--dark-text);
+    margin-bottom: 10px;
+  }
+
+  .stepcard h3 { margin: 0 0 5px; font-family: "Baloo 2", sans-serif; font-size: 1.05rem; }
+  .stepcard p { margin: 0; color: var(--muted); font-size: 0.92rem; }
+
+  .howto {
+    margin-top: 16px;
+    padding: 16px 20px;
+    border-radius: 16px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+  }
+
+  .howto h3 { margin: 0 0 8px; font-family: "Baloo 2", sans-serif; }
+
+  .howto ol { margin: 0; padding-left: 20px; }
+  .howto li { margin-bottom: 7px; font-size: 0.95rem; }
+  .howto li:last-child { margin-bottom: 0; }
+
+  .praktiskt {
+    margin-top: 14px;
+    padding: 13px 20px;
+    border-radius: 14px;
+    border: 2px dashed var(--teal);
+    color: var(--muted);
+    font-size: 0.93rem;
+  }
+
+  .praktiskt strong { color: var(--ink); }
+
+  /* ---------- block: uppgifter ---------- */
+
+  .sect-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+
+  h2 {
+    margin: 0;
+    font-family: "Baloo 2", sans-serif;
+    font-weight: 800;
+    font-size: 1.8rem;
+    color: var(--ink);
+  }
+
+  .sect-note { color: var(--muted); font-size: 0.9rem; max-width: 74ch; }
+
+  .filters {
+    display: flex;
+    gap: 7px;
+    flex-wrap: wrap;
+    margin: 16px 0 18px;
+  }
+
+  .filters button {
+    padding: 6px 14px;
+    font-size: 0.82rem;
+    background: var(--panel-soft);
+    color: var(--muted);
+  }
+
+  .filters button.on {
+    color: var(--dark-text);
+  }
+
+  .filters button.on.c-frontend { background: var(--sky); }
+  .filters button.on.c-git      { background: var(--olive); }
+  .filters button.on.c-ux       { background: var(--purple); }
+  .filters button.on.c-js       { background: var(--yellow); }
+  .filters button.on.c-devops   { background: var(--teal); }
+  .filters button.on.c-net      { background: var(--coral); }
+  .filters button.on.c-social   { background: var(--pink); }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 13px;
+  }
+
+  .task {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 18px 20px;
+    border-radius: 16px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+  }
+
+  .task-top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .track {
+    padding: 3px 11px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--dark-text);
+  }
+
+  .track.c-frontend { background: var(--sky); }
+  .track.c-git      { background: var(--olive); }
+  .track.c-ux       { background: var(--purple); }
+  .track.c-js       { background: var(--yellow); }
+  .track.c-devops   { background: var(--teal); }
+  .track.c-net      { background: var(--coral); }
+  .track.c-social   { background: var(--pink); }
+
+  .points {
+    margin-left: auto;
+    font-family: "Baloo 2", sans-serif;
+    font-weight: 800;
+    font-size: 1.05rem;
+    color: var(--yellow);
+  }
+
+  .task h3 { margin: 0; font-family: "Baloo 2", sans-serif; font-size: 1.12rem; line-height: 1.2; }
+
+  .task .desc { margin: 0; color: var(--muted); font-size: 0.93rem; flex-grow: 1; }
+
+  .proof {
+    padding: 10px 13px;
+    border-radius: 12px;
+    background: var(--panel-soft);
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .proof strong { color: var(--ink); font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; display: block; margin-bottom: 2px; }
+
+  .task-foot {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .claim {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .claim input {
+    width: 21px;
+    height: 21px;
+    margin: 0;
+    accent-color: var(--lime);
+    cursor: pointer;
+  }
+
+  .claim input:disabled { cursor: not-allowed; }
+
+  .state-ok, .state-wait {
+    font-size: 0.82rem;
+    font-weight: 800;
+    padding: 6px 13px;
+    border-radius: 999px;
+  }
+
+  .state-ok   { background: var(--lime); color: var(--dark-text); }
+  .state-wait { background: var(--yellow); color: var(--dark-text); }
+
+  .denied-note {
+    padding: 9px 13px;
+    border-radius: 12px;
+    background: rgba(240, 109, 133, 0.12);
+    border: 1px dashed var(--pink);
+    color: var(--muted);
+    font-size: 0.86rem;
+  }
+
+  .denied-note strong { color: var(--pink); }
+
+  /* ---------- block: ratta ---------- */
+
+  .subcard {
+    margin-top: 18px;
+    padding: 18px 20px;
+    border-radius: 16px;
+    background: var(--panel);
+    border: 1px solid var(--bubble);
+  }
+
+  .subcard h3 { margin: 0 0 6px; font-family: "Baloo 2", sans-serif; font-size: 1.15rem; }
+
+  .subcard > p { color: var(--muted); font-size: 0.92rem; margin-bottom: 12px; }
+
+  .subgrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .subgrid input {
+    padding: 10px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--panel-soft);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 0.9rem;
+    width: 100%;
+  }
+
+  .subcard .subsend { margin-top: 10px; background: var(--bubble); color: var(--dark-text); }
+
+  .substatus {
+    margin-top: 10px;
+    font-size: 0.86rem;
+    color: var(--muted);
+  }
+
+  .substatus strong { color: var(--lime); }
+
+  .queue { display: grid; gap: 14px; margin-top: 14px; }
+
+  .rev {
+    padding: 17px 20px;
+    border-radius: 16px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+  }
+
+  .rev-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+
+  .rev-head .q-team { font-family: "Baloo 2", sans-serif; font-weight: 800; font-size: 1.1rem; }
+
+  .rev-links { font-size: 0.9rem; word-break: break-all; margin-bottom: 8px; }
+
+  .rev-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 6px 14px;
+    align-items: center;
+    padding: 11px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .rev-row .t { font-weight: 800; font-size: 0.95rem; }
+  .rev-row .t .pts { color: var(--yellow); margin-left: 6px; }
+  .rev-row .p { grid-column: 1; color: var(--muted); font-size: 0.84rem; }
+  .rev-row .acts { grid-row: 1 / span 2; grid-column: 2; display: flex; gap: 7px; }
+
+  .btn-approve { background: var(--lime); color: var(--dark-text); }
+  .btn-deny    { background: var(--panel-soft); color: var(--pink); }
+  .btn-ghost   { background: var(--panel-soft); color: var(--ink); }
+
+  .rev-all { margin-top: 12px; background: var(--yellow); color: var(--dark-text); }
+
+  .rev-done {
+    margin-top: 10px;
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+
+  .rev-done strong { color: var(--lime); }
+
+  .demo-note {
+    margin-top: 16px;
+    padding: 13px 18px;
+    border-radius: 14px;
+    border: 2px dashed var(--yellow);
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+
+  .demo-note strong { color: var(--yellow); }
+
+  .empty {
+    margin-top: 14px;
+    padding: 22px;
+    border-radius: 16px;
+    border: 1px dashed var(--line);
+    text-align: center;
+    color: var(--muted);
+  }
+
+  /* ---------- block: topplista ---------- */
+
+  .board {
+    margin-top: 18px;
+    border-radius: 16px;
+    border: 1px solid var(--line);
+    overflow: hidden;
+    background: var(--panel);
+  }
+
+  .board-row {
+    display: grid;
+    grid-template-columns: 64px 1fr auto;
+    gap: 14px;
+    align-items: center;
+    padding: 13px 20px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .board-row:last-child { border-bottom: 0; }
+
+  .board-row .place {
+    font-family: "Baloo 2", sans-serif;
+    font-weight: 800;
+    font-size: 1.3rem;
+    color: var(--muted);
+  }
+
+  .board-row:nth-child(1) .place { color: var(--yellow); }
+  .board-row:nth-child(2) .place { color: var(--sky); }
+  .board-row:nth-child(3) .place { color: var(--coral); }
+
+  .board-row .name { font-weight: 800; font-size: 1.05rem; }
+  .board-row .name .you {
+    margin-left: 8px;
+    font-size: 0.72rem;
+    padding: 2px 9px;
+    border-radius: 999px;
+    background: var(--bubble);
+    color: var(--dark-text);
+  }
+
+  .board-row .pts {
+    font-family: "Baloo 2", sans-serif;
+    font-weight: 800;
+    font-size: 1.35rem;
+    color: var(--bubble);
+  }
+
+  .walllink {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    background: var(--pink);
+    color: var(--dark-text);
+  }
+
+  /* ---------- organisatörsvy ---------- */
+
+  .org-app { display: none; }
+
+  body.org-only .app { display: none; }
+  body.org-only .org-app { display: block; }
+
+  .org-app h2 {
+    margin: 34px 0 18px;
+    font-family: "Baloo 2", sans-serif;
+    font-weight: 800;
+    font-size: 1.9rem;
+    color: var(--bubble);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .org-note {
+    margin-top: 14px;
+    color: var(--muted);
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  /* ---------- vagglage ---------- */
+
+  .wall-app { display: none; }
+
+  body.wall-only .app { display: none; }
+  body.wall-only .wall-app { display: block; }
+
+  .wall-app h2 {
+    color: var(--bubble);
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    text-align: center;
+    margin: 40px 0 30px;
+  }
+
+  .wall-board { width: min(1000px, 92vw); margin-inline: auto; }
+
+  .wall-board .board-row {
+    grid-template-columns: 110px 1fr auto;
+    padding: 20px 28px;
+  }
+
+  .wall-board .place { font-size: 2.4rem; }
+  .wall-board .name { font-size: 2rem; }
+  .wall-board .pts { font-size: 2.6rem; }
+
+  .wall-exit {
+    position: fixed;
+    bottom: 18px;
+    right: 18px;
+    background: var(--panel);
+    color: var(--muted);
+    font-size: 0.8rem;
+    padding: 7px 14px;
+  }
+
+  /* ---------- fot ---------- */
+
+  footer {
+    padding: 18px 0 30px;
+    color: var(--muted);
+    font-size: 0.83rem;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  footer .reset {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    padding: 5px 13px;
+    font-size: 0.76rem;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  @media (max-width: 760px) {
+    .steps, .grid, .subgrid { grid-template-columns: 1fr; }
+    .teambox { margin-left: 0; width: 100%; }
+    .teambox input { flex: 1; width: auto; }
+    .rev-row { grid-template-columns: 1fr; }
+    .rev-row .acts { grid-row: auto; grid-column: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <div class="topbar">
+    <div class="wrap">
+      <div class="topbar-inner">
+        <div class="logo">
+          <span class="shapes" aria-hidden="true"><i></i><i></i><i></i></span>
+          ChasHack
+        </div>
+        <div class="teambox">
+          <label for="teamname">Ditt lag:</label>
+          <input id="teamname" type="text" maxlength="30" autocomplete="off">
+        </div>
+      </div>
+      <nav class="tabs" aria-label="Sektioner">
+        <button data-go="start" aria-selected="true">Start</button>
+        <button data-go="uppgifter" aria-selected="false">Uppgifter</button>
+        <button data-go="ratta" aria-selected="false">Rätta</button>
+        <button data-go="topplista" aria-selected="false">Topplista</button>
+      </nav>
+    </div>
+  </div>
+
+  <main class="wrap">
+
+    <section id="start">
+      <div class="hero">
+        <img src="sources/assets/chasHack-header.png" alt="ChasHack-logotypen i bubbelbokstäver omgiven av färgglada former">
+      </div>
+      <h1>Välkommen till uppgiftsdagen</h1>
+      <p class="intro">Idag bygger ert lag en liten webbplats tillsammans, från första klicket
+      till en publik sida på nätet. Plocka uppgifter ur rutnätet, bocka av när ni är klara
+      och klättra på topplistan. Allt ni gör samlas i lagets eget repo, och det är hela
+      ert bevis: en länk, det är hela er inlämning.</p>
+
+      <div class="steps">
+        <div class="stepcard">
+          <span class="step-no" style="background:var(--bubble)" aria-hidden="true">1</span>
+          <h3>Hitta ditt lag</h3>
+          <p>Ni är redan indelade i lag. Hitta varandra, välj ett lagnamn tillsammans och
+          skriv in det uppe till höger. Alla ska få bidra, ingen ensam bär ansvaret.</p>
+        </div>
+        <div class="stepcard">
+          <span class="step-no" style="background:var(--orange)" aria-hidden="true">2</span>
+          <h3>Skapa konto och repo</h3>
+          <p>Skapa ett gratis konto på github.com om ni inte har ett. Använd sedan knappen
+          "Use this template" på ChasHack-mallen så får ert lag en egen kopia.</p>
+        </div>
+        <div class="stepcard">
+          <span class="step-no" style="background:var(--lime)" aria-hidden="true">3</span>
+          <h3>Klona, bygg, bocka</h3>
+          <p>Ladda ner repot med <code>git clone</code>, bygg uppgifter tillsammans och
+          bocka av i rutnätet. Ett annat lag rättar er via er repo-länk.</p>
+        </div>
+      </div>
+
+      <div class="howto">
+        <h3>Snabbstart: från noll till repo</h3>
+        <ol>
+          <li>En person i laget: skapa konto på <strong>github.com</strong> (det är gratis,
+          bara en mejladress behövs).</li>
+          <li>Gå till ChasHack-mallen och klicka <strong>Use this template</strong>, välj
+          <strong>Create new repository</strong> och ge den lagets namn.</li>
+          <li>Kopiera länken till ert nya repo och kör:
+          <code>git clone REPO-LÄNK</code></li>
+          <li>Gå in i mappen: <code>cd REPOTS-NAMN</code>, öppna <code>index.html</code>
+          och gör er första ändring tillsammans.</li>
+          <li>Spara, committa och pusha: <code>git add .</code>,
+          <code>git commit -m "första ändringen"</code>, <code>git push</code></li>
+          <li>Bocka av er första uppgift i rutnätet och lämna in er repo-länk på fliken
+          Rätta, så kommer poängen när ett annat lag godkänt.</li>
+        </ol>
+      </div>
+
+      <p class="praktiskt"><strong>Praktiskt:</strong> dagen pågår 09 till 16. Ta med eller
+      köp egen mat, ingen lunch serveras. Fastnar ni? Hissa handen, en arrangör kommer och
+      kopplar er till rätt hjälp.</p>
+    </section>
+
+    <section id="uppgifter" hidden>
+      <div class="sect-head">
+        <h2>Uppgiftsrutnätet</h2>
+      </div>
+      <p class="sect-note">Plocka i valfri ordning, men blanda spår: alla spår ska finnas med
+      i ert lag. Bocka av en uppgift när ni är klara: ni lämnar inte in något per uppgift,
+      ert repo är beviset och lämnas in en gång på fliken Rätta.
+      <em>Underlaget är plockat från whiteboarden tills deltagarlistorna är spikade.
+      .NET-uppgifterna sätts av Victoria &amp; Theo.</em></p>
+      <div class="filters" id="filters"></div>
+      <div class="grid" id="taskgrid"></div>
+    </section>
+
+    <section id="ratta" hidden>
+      <div class="sect-head">
+        <h2>Lämna in och rätta</h2>
+      </div>
+      <p class="sect-note">En inlämning per lag: länken till ert repo, gärna plus den
+      publicerade sidan. Ett annat lag öppnar länken, kollar era avbockade uppgifter mot
+      beviskraven och godkänner det som stämmer.</p>
+
+      <div class="subcard">
+        <h3>Ert lags inlämning</h3>
+        <p>En gång räcker. Ändras länkarna uppdaterar ni bara dem här.</p>
+        <div class="subgrid">
+          <input id="repo-url" type="url" placeholder="Repo-länk (https://github.com/lag/repo)" aria-label="Repo-länk">
+          <input id="live-url" type="url" placeholder="Publicerad sida, valfri (https://...)" aria-label="Publicerad sida">
+        </div>
+        <button class="subsend" id="subsend">Skicka till granskning</button>
+        <div class="substatus" id="substatus"></div>
+      </div>
+
+      <div class="queue" id="queue"></div>
+
+      <p class="demo-note"><strong>Demonstration:</strong> Wookie Warriors är ett simulerat
+      annat lag som du får granska, och allt körs lokalt i din webbläsare. I den riktiga
+      versionen tilldelar servern varje lag en inlämning att granska, och ett lag kan
+      aldrig rightas av sig självt.</p>
+    </section>
+
+    <section id="topplista" hidden>
+      <div class="sect-head">
+        <h2>Topplistan</h2>
+      </div>
+      <p class="sect-note">Ställningen uppdateras när ett rättarlag godkänner avbockade
+      uppgifter. Väggläget visar samma lista, fullskärm och stor text.</p>
+      <div class="board" id="board"></div>
+      <button class="walllink" id="openwall">Öppna väggläget</button>
+    </section>
+
+  </main>
+
+  <footer class="wrap">
+    <span>v1-demon: allting körs lokalt i din webbläsare, inget skickas någonstans.</span>
+    <a class="reset" href="uppgiftssida.html?org=1" target="_blank" rel="noopener">Leaderboard: alla lag</a>
+    <button class="reset" id="reset">Nollställ demon</button>
+  </footer>
+
+</div>
+
+<div class="wall-app">
+  <h2>ChasHack: topplistan</h2>
+  <div class="wall-board board" id="wallboard"></div>
+  <a class="wall-exit" href="uppgiftssida.html">Stäng väggen</a>
+</div>
+
+<div class="org-app">
+  <h2>Leaderboard: alla lag</h2>
+  <div class="wrap board" id="orgboard"></div>
+  <p class="org-note">Alla lag, live. Samma data som fliken Topplista: uppdateras när
+  rättarlag godkänner uppgifter.</p>
+  <a class="wall-exit" href="uppgiftssida.html">Tillbaka</a>
+</div>
+
+<script>
+"use strict";
+
+/* ---------- data ---------- */
+
+const TRACKS = {
+  frontend: { name: "Frontend",     cls: "c-frontend" },
+  git:      { name: "Git & GitHub", cls: "c-git" },
+  ux:       { name: "UX",           cls: "c-ux" },
+  js:       { name: "JavaScript",   cls: "c-js" },
+  devops:   { name: "DevOps",       cls: "c-devops" },
+  net:      { name: ".NET",         cls: "c-net" },
+  social:   { name: "Socialt",      cls: "c-social" }
+};
+
+/* Underlag plockat från whiteboarden 24 aug tills Discord-listorna klistras in */
+const TASKS = [
+  { id: "fe-bug", track: "frontend", points: 10, level: "Lätt",
+    title: "Rätta buggen",
+    desc: "I skelettet ligger en bugg: knappen syns inte. Hitta orsaken och fixa den.",
+    proof: "Commit-länk i lagets repo där buggen är fixad." },
+  { id: "fe-knapp", track: "frontend", points: 5, level: "Lätt",
+    title: "Knappen och rubriken",
+    desc: "Byt knappens text till lagets namn och ändra teckenstorleken på rubriken.",
+    proof: "Commit plus en skärmdump i repot som visar ändringen." },
+  { id: "fe-favicon", track: "frontend", points: 10, level: "Lätt",
+    title: "Egen favicon",
+    desc: "Skapa en favicon för laget och koppla den till sidan.",
+    proof: "Filen i repot och en förklaring i README vad en favicon är." },
+  { id: "git-repo", track: "git", points: 10, level: "Lätt",
+    title: "Publikt repo",
+    desc: "Skapa GitHub-konto, använd mallen och publicera lagets repo.",
+    proof: "Repo-URL som öppnas utan inloggning." },
+  { id: "git-commits", track: "git", points: 10, level: "Lätt",
+    title: "Committa ihop",
+    desc: "Alla i laget gör minst en commit och push var.",
+    proof: "Historiken i repot visar commits från flera namn." },
+  { id: "git-add", track: "git", points: 5, level: "Lätt",
+    title: "Förklara git add",
+    desc: "Skriv i README, i egna ord, vad git add gör.",
+    proof: "README-filen i lagets repo." },
+  { id: "ux-logga", track: "ux", points: 15, level: "Medel",
+    title: "Grupplogga",
+    desc: "Designa en logga för laget och lägg den på webbplatsen.",
+    proof: "Loggfilen i repot och loggan syns på sidan (skärmdump)." },
+  { id: "ux-alt", track: "ux", points: 10, level: "Lätt",
+    title: "Alt-text överallt",
+    desc: "Lägg till alt-text på alla bilder och förklara i README varför alt-text behövs.",
+    proof: "Kodraderna i repot plus förklaringen i README." },
+  { id: "ux-wire", track: "ux", points: 10, level: "Lätt",
+    title: "Wireframe",
+    desc: "Rita en wireframe för lagets sida. Papper räcker, fota den.",
+    proof: "Bilden i repot." },
+  { id: "js-raknare", track: "js", points: 15, level: "Medel",
+    title: "Klickräknare",
+    desc: "Bygg en knapp som räknar antal klick och visar siffran på sidan.",
+    proof: "Koden i repot plus skärmdump eller GIF som visar att den fungerar." },
+  { id: "js-skamt", track: "js", points: 5, level: "Lätt",
+    title: "Programmeringsskämt",
+    desc: "Lägg in ett programmeringsskämt i sidfoten.",
+    proof: "Skämtet syns på sidan (skärmdump i repot)." },
+  { id: "devops-pages", track: "devops", points: 20, level: "Medel",
+    title: "Deploya sidan",
+    desc: "Publicera lagets sida med GitHub Pages.",
+    proof: "Fungerande URL som öppnas utan inloggning." },
+  { id: "devops-team", track: "devops", points: 10, level: "Lätt",
+    title: "Grupptillgång",
+    desc: "Bjud in alla i laget som collaborators på repot.",
+    proof: "Skärmdump på inställningen i repot." },
+  { id: "net-a", track: "net", points: 15, level: "Medel",
+    title: ".NET-uppgift (spikas)",
+    desc: "Ettorna har inte börjat .NET, så här kommer en supertönt-nybörjaruppgift.",
+    proof: "Sätts av Victoria & Theo tillsammans med uppgiften." },
+  { id: "net-b", track: "net", points: 15, level: "Medel",
+    title: ".NET-uppgift (spikas)",
+    desc: "Andra .NET-platshållaren, spikas av Victoria & Theo.",
+    proof: "Sätts av Victoria & Theo tillsammans med uppgiften." },
+  { id: "so-lagbild", track: "social", points: 10, level: "Lätt",
+    title: "Lagbild",
+    desc: "Ta en riktig lagbild på plats och lägg den på sidan.",
+    proof: "Bilden i lagets repo." },
+  { id: "so-intervju", track: "social", points: 10, level: "Lätt",
+    title: "Intervjua en kompis",
+    desc: "Intervjua en lagkamrat och skriv en kort profiltext om personen.",
+    proof: "Profiltexten syns på sidan." },
+  { id: "so-linkedin", track: "social", points: 15, level: "Medel",
+    title: "LinkedIn ihop",
+    desc: "Lägg till varandra på LinkedIn och skriv in Chas Academy som utbildning.",
+    proof: "Publika profil-URL:er, här i inlämningen." },
+  { id: "so-chatt", track: "social", points: 5, level: "Lätt",
+    title: "Lagchatt",
+    desc: "Skapa en gruppchatt med hela laget (Discord, Slack eller WhatsApp).",
+    proof: "Skärmdump på inbjudan med alla medlemmar." }
+];
+
+/* demolag så boarden inte står tom i v1 */
+const DEMO_TEAMS = [
+  { name: "Kompilerar Kaffe", points: 30 },
+  { name: "Merge Conflicts",  points: 20 },
+  { name: "Team Kyckling",    points: 10 }
+];
+
+/* simulerat annat lag: det är dem du rightar i demon, aldrig dig själv */
+const SIM_TEAM = {
+  name: "Wookie Warriors",
+  basePoints: 25,
+  repo: "https://github.com/wookie-warriors/chashack",
+  live: "https://wookie-warriors.github.io/chashack",
+  claims: ["fe-bug", "ux-wire", "git-add"]
+};
+
+function simPoints() {
+  return SIM_TEAM.basePoints + SIM_TEAM.claims.reduce(function (sum, id) {
+    return sum + (state.simApproved[id] ? taskById(id).points : 0);
+  }, 0);
+}
+
+/* ---------- state ---------- */
+
+const KEY = "chashack-uppgiftssida-v1";
+
+function fresh() {
+  return { team: "Ditt lag", claimed: {}, approved: {}, denied: {}, sub: null,
+           simApproved: {}, simDenied: {} };
+}
+
+function load() {
+  try { return JSON.parse(localStorage.getItem(KEY)); } catch (e) { return null; }
+}
+
+function save() {
+  try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+}
+
+let state = Object.assign(fresh(), load() || {});
+
+function taskById(id) {
+  return TASKS.find(function (t) { return t.id === id; });
+}
+
+function myPoints() {
+  return TASKS.reduce(function (sum, t) {
+    return sum + (state.approved[t.id] ? t.points : 0);
+  }, 0);
+}
+
+/* ---------- hjälpare ---------- */
+
+function el(tag, cls, text) {
+  const node = document.createElement(tag);
+  if (cls) node.className = cls;
+  if (text !== undefined) node.textContent = text;
+  return node;
+}
+
+/* inlämningslänkar ska vara riktiga länkar, aldrig javascript-URL:er */
+function safeLink(url) {
+  const a = el("a");
+  if (/^https?:\/\//i.test(url)) {
+    a.href = url;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    a.textContent = url;
+  } else {
+    a.href = "#";
+    a.addEventListener("click", function (e) { e.preventDefault(); });
+    a.textContent = url + " (inte en giltig länk)";
+    a.style.color = "var(--pink)";
+  }
+  return a;
+}
+
+/* ---------- flikar ---------- */
+
+const PANELS = ["start", "uppgifter", "ratta", "topplista"];
+
+function showPanel(name) {
+  PANELS.forEach(function (p) {
+    document.getElementById(p).hidden = (p !== name);
+  });
+  document.querySelectorAll("nav.tabs button").forEach(function (b) {
+    b.setAttribute("aria-selected", String(b.dataset.go === name));
+  });
+}
+
+document.querySelectorAll("nav.tabs button").forEach(function (b) {
+  b.addEventListener("click", function () {
+    location.hash = b.dataset.go;
+  });
+});
+
+window.addEventListener("hashchange", function () {
+  const h = location.hash.replace("#", "");
+  if (PANELS.indexOf(h) !== -1) showPanel(h);
+});
+
+/* ---------- uppgiftsrutnät ---------- */
+
+let activeFilter = "all";
+
+function renderFilters() {
+  const box = document.getElementById("filters");
+  box.textContent = "";
+  const all = el("button", activeFilter === "all" ? "on" : "", "Alla");
+  all.addEventListener("click", function () { activeFilter = "all"; renderGrid(); });
+  box.appendChild(all);
+  Object.keys(TRACKS).forEach(function (key) {
+    const t = TRACKS[key];
+    const b = el("button", (activeFilter === key ? "on " : "") + t.cls, t.name);
+    b.addEventListener("click", function () { activeFilter = key; renderGrid(); });
+    box.appendChild(b);
+  });
+}
+
+function renderGrid() {
+  renderFilters();
+  const grid = document.getElementById("taskgrid");
+  grid.textContent = "";
+  TASKS.forEach(function (task) {
+    if (activeFilter !== "all" && task.track !== activeFilter) return;
+    grid.appendChild(taskCard(task));
+  });
+}
+
+function taskCard(task) {
+  const card = el("article", "task");
+
+  const top = el("div", "task-top");
+  top.appendChild(el("span", "track " + TRACKS[task.track].cls, TRACKS[task.track].name));
+  top.appendChild(el("span", "points", task.points + " p"));
+  card.appendChild(top);
+
+  card.appendChild(el("h3", "", task.title));
+  card.appendChild(el("p", "desc", task.desc));
+
+  const proof = el("div", "proof");
+  proof.appendChild(el("strong", "", "Bevis (kollas av rättarlaget i ert repo)"));
+  proof.appendChild(el("span", "", task.proof));
+  card.appendChild(proof);
+
+  if (state.denied[task.id]) {
+    const note = el("div", "denied-note");
+    note.appendChild(el("strong", "", "Underkänd: "));
+    note.appendChild(el("span", "", state.denied[task.id] + " Bocka av igen när det är fixat."));
+    card.appendChild(note);
+  }
+
+  const foot = el("div", "task-foot");
+
+  const label = el("label", "claim");
+  const box = el("input");
+  box.type = "checkbox";
+  box.checked = Boolean(state.claimed[task.id]);
+  box.disabled = Boolean(state.approved[task.id]);
+  box.setAttribute("aria-label", "Markera " + task.title + " som klar");
+  box.addEventListener("change", function () {
+    if (box.checked) {
+      state.claimed[task.id] = true;
+      delete state.denied[task.id];
+    } else {
+      delete state.claimed[task.id];
+    }
+    save();
+    renderAll();
+  });
+  label.appendChild(box);
+  label.appendChild(el("span", "", "Klar"));
+  foot.appendChild(label);
+
+  if (state.approved[task.id]) {
+    foot.appendChild(el("span", "state-ok", "Godkänd"));
+  } else if (state.claimed[task.id]) {
+    foot.appendChild(el("span", "state-wait", "Väntar på granskning"));
+  }
+
+  card.appendChild(foot);
+  return card;
+}
+
+/* ---------- inlämning ---------- */
+
+const repoInput = document.getElementById("repo-url");
+const liveInput = document.getElementById("live-url");
+const subStatus = document.getElementById("substatus");
+
+function renderSubmission() {
+  if (state.sub) {
+    repoInput.value = state.sub.repo;
+    liveInput.value = state.sub.live || "";
+    subStatus.textContent = "";
+    subStatus.appendChild(el("strong", "", "Inlämnad. "));
+    subStatus.appendChild(el("span", "",
+      "Ett annat lag rättar er via länkarna. Glöm inte att bocka av det ni klarat i rutnätet."));
+  } else {
+    subStatus.textContent = "";
+  }
+}
+
+document.getElementById("subsend").addEventListener("click", function () {
+  const repo = repoInput.value.trim();
+  if (!repo || !/^https?:\/\//i.test(repo)) {
+    subStatus.textContent = "Fyll i en giltig repo-länk (https://...) först.";
+    return;
+  }
+  state.sub = { repo: repo, live: liveInput.value.trim(), ts: Date.now() };
+  save();
+  renderAll();
+});
+
+/* ---------- granskningskön ---------- */
+
+function renderQueue() {
+  const box = document.getElementById("queue");
+  box.textContent = "";
+
+  /* ert eget lag: inlämnat och ute på granskning, aldrig rättbart av er själv */
+  if (state.sub) {
+    const own = el("div", "rev");
+    const ownHead = el("div", "rev-head");
+    ownHead.appendChild(el("span", "q-team", state.team));
+    ownHead.appendChild(el("span", "state-wait", "ute på granskning"));
+    own.appendChild(ownHead);
+    const ownLinks = el("div", "rev-links");
+    ownLinks.appendChild(el("span", "", "Repo: "));
+    ownLinks.appendChild(safeLink(state.sub.repo));
+    if (state.sub.live) {
+      ownLinks.appendChild(el("span", "", "  ·  Sida: "));
+      ownLinks.appendChild(safeLink(state.sub.live));
+    }
+    own.appendChild(ownLinks);
+    own.appendChild(el("p", "", "Servern tilldelar er inlämning till ett annat lag. Ni kan aldrig granska er själv."));
+    const pendingOwn = TASKS.filter(function (t) {
+      return state.claimed[t.id] && !state.approved[t.id];
+    });
+    if (pendingOwn.length > 0) {
+      const demoBtn = el("button", "btn-back", "Demo: rättarlaget godkänner nästa uppgift");
+      demoBtn.addEventListener("click", function () {
+        const next = TASKS.find(function (t) {
+          return state.claimed[t.id] && !state.approved[t.id];
+        });
+        if (next) state.approved[next.id] = true;
+        save();
+        renderAll();
+      });
+      own.appendChild(demoBtn);
+    }
+    box.appendChild(own);
+  } else {
+    box.appendChild(el("div", "empty",
+      "Skicka er repo-länk ovan, så läggs den i kön och ett annat lag right er."));
+  }
+
+  /* det simulerade andra laget: här är du rättarlaget */
+  const toReview = SIM_TEAM.claims.filter(function (id) {
+    return !state.simApproved[id] && !state.simDenied[id];
+  });
+
+  box.appendChild(simCard(toReview));
+
+  const done = el("p", "rev-done");
+  done.appendChild(el("strong", "", "Er granskning hittills: "));
+  const approvedN = Object.keys(state.simApproved).length;
+  done.appendChild(el("span", "", approvedN + " av " + SIM_TEAM.claims.length +
+    " uppgifter godkända hos " + SIM_TEAM.name + "."));
+  box.appendChild(done);
+}
+
+function simCard(toReview) {
+  const rev = el("div", "rev");
+
+  const head = el("div", "rev-head");
+  head.appendChild(el("span", "q-team", SIM_TEAM.name));
+  head.appendChild(el("span", "", "granska deras inlämning"));
+  rev.appendChild(head);
+
+  const links = el("div", "rev-links");
+  links.appendChild(el("span", "", "Repo: "));
+  links.appendChild(safeLink(SIM_TEAM.repo));
+  links.appendChild(el("span", "", "  ·  Sida: "));
+  links.appendChild(safeLink(SIM_TEAM.live));
+  rev.appendChild(links);
+
+  if (toReview.length === 0) {
+    rev.appendChild(el("p", "", "Allt granskat: bra jobbat, vidare till nästa omgång."));
+    return rev;
+  }
+
+  toReview.forEach(function (id) {
+    const task = taskById(id);
+    const row = el("div", "rev-row");
+    const t = el("span", "t", task.title);
+    t.appendChild(el("span", "pts", task.points + " p"));
+    row.appendChild(t);
+    row.appendChild(el("span", "p", "Bevis: " + task.proof));
+
+    const acts = el("div", "acts");
+    const ok = el("button", "btn-approve", "Godkänn");
+    ok.addEventListener("click", function () {
+      state.simApproved[id] = true;
+      save();
+      renderAll();
+    });
+    const no = el("button", "btn-deny", "Underkänn");
+    no.addEventListener("click", function () {
+      const c = window.prompt("Vad saknas i deras repo? (kort kommentar)");
+      if (c === null) return;
+      state.simDenied[id] = true;
+      save();
+      renderAll();
+    });
+    acts.appendChild(ok);
+    acts.appendChild(no);
+    row.appendChild(acts);
+    rev.appendChild(row);
+  });
+
+  const all = el("button", "rev-all", "Godkänn alla (" + toReview.length + ")");
+  all.addEventListener("click", function () {
+    toReview.forEach(function (id) { state.simApproved[id] = true; });
+    save();
+    renderAll();
+  });
+  rev.appendChild(all);
+
+  return rev;
+}
+
+/* ---------- topplista ---------- */
+
+function boardRows(includeMe) {
+  const rows = DEMO_TEAMS.map(function (t) {
+    return { name: t.name, points: t.points, me: false };
+  });
+  rows.push({ name: SIM_TEAM.name, points: simPoints(), me: false });
+  if (includeMe) rows.push({ name: state.team, points: myPoints(), me: true });
+  rows.sort(function (a, b) { return b.points - a.points; });
+  return rows;
+}
+
+function renderBoard(intoId, includeMe) {
+  const box = document.getElementById(intoId);
+  box.textContent = "";
+  boardRows(includeMe !== false).forEach(function (row, i) {
+    const line = el("div", "board-row");
+    line.appendChild(el("span", "place", String(i + 1)));
+    const name = el("span", "name", row.name);
+    if (row.me) name.appendChild(el("span", "you", "erat lag"));
+    line.appendChild(name);
+    line.appendChild(el("span", "pts", String(row.points)));
+    box.appendChild(line);
+  });
+}
+
+/* ---------- lag ---------- */
+
+const teamInput = document.getElementById("teamname");
+teamInput.value = state.team;
+teamInput.addEventListener("change", function () {
+  state.team = teamInput.value.trim() || "Ditt lag";
+  teamInput.value = state.team;
+  save();
+  renderAll();
+});
+
+/* ---------- nollställ ---------- */
+
+document.getElementById("reset").addEventListener("click", function () {
+  if (!window.confirm("Nollställa demon? Alla bockar och inlämningar tas bort.")) return;
+  try { localStorage.removeItem(KEY); } catch (e) {}
+  state = fresh();
+  teamInput.value = state.team;
+  renderAll();
+});
+
+/* ---------- väggläge ---------- */
+
+function isWall() {
+  try {
+    return new URLSearchParams(window.location.search).has("wall");
+  } catch (e) { return false; }
+}
+
+function isOrg() {
+  try {
+    return new URLSearchParams(window.location.search).has("org");
+  } catch (e) { return false; }
+}
+
+document.getElementById("openwall").addEventListener("click", function () {
+  window.open("uppgiftssida.html?wall=1", "chashack-vägg");
+});
+
+function renderAll() {
+  renderGrid();
+  renderSubmission();
+  renderQueue();
+  renderBoard("board");
+  renderBoard("wallboard");
+}
+
+/* ---------- igång ---------- */
+
+if (isWall()) {
+  document.body.classList.add("wall-only");
+  renderBoard("wallboard");
+  window.addEventListener("storage", function (e) {
+    if (e.key === KEY) {
+      state = Object.assign(fresh(), load() || {});
+      renderBoard("wallboard");
+    }
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") window.location.href = "uppgiftssida.html";
+  });
+} else if (isOrg()) {
+  document.body.classList.add("org-only");
+  renderBoard("orgboard", true);
+  window.addEventListener("storage", function (e) {
+    if (e.key === KEY) {
+      state = Object.assign(fresh(), load() || {});
+      renderBoard("orgboard", true);
+    }
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") window.location.href = "uppgiftssida.html";
+  });
+} else {
+  const startHash = location.hash.replace("#", "");
+  showPanel(PANELS.indexOf(startHash) !== -1 ? startHash : "start");
+  renderAll();
+}
+</script>
+</body>
+</html>

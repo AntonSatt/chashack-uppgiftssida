@@ -1,0 +1,943 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Den nya uppgiftssidan, plan v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap">
+<style>
+  :root {
+    --coal: #28282a;
+    --panel: rgba(46, 46, 50, 0.93);
+    --ink: #f5f3ec;
+    --muted: #bab8af;
+    --line: rgba(255, 255, 255, 0.09);
+    --bubble: #a9dcf6;
+    --sky: #7ec6ec;
+    --orange: #f2a55b;
+    --coral: #ec8a7b;
+    --teal: #7ea896;
+    --lime: #b6d26e;
+    --blue: #4d63ee;
+    --pink: #f06d85;
+    --purple: #c792d8;
+    --olive: #c6b54f;
+    --yellow: #ecd15e;
+    --dark-text: #26262a;
+    --radius: 22px;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--coal) url("sources/assets/chasHack-bg.png") center / cover no-repeat fixed;
+    color: var(--ink);
+    font-family: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 16.5px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* tonar bakgrunden ned sa texten lasbart, formerna syns i kanterna */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(30, 30, 33, 0.85);
+    z-index: -1;
+  }
+
+  img { display: block; max-width: 100%; }
+
+  a { color: var(--sky); }
+  a:focus-visible, button:focus-visible {
+    outline: 3px solid var(--sky);
+    outline-offset: 2px;
+  }
+
+  .doc {
+    width: min(880px, 100% - 40px);
+    margin-inline: auto;
+    padding: 52px 0 96px;
+  }
+
+  /* ---------- rubriker ---------- */
+
+  .kicker {
+    display: inline-block;
+    margin: 0 0 16px;
+    padding: 7px 15px;
+    border-radius: 999px;
+    background: var(--blue);
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 0.78rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin: 0 0 14px;
+    font-family: "Baloo 2", "Arial Rounded MT Bold", sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.7rem, 7vw, 4.3rem);
+    line-height: 0.98;
+    color: var(--bubble);
+    text-shadow: 0 4px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  .lede {
+    max-width: 64ch;
+    margin: 0 0 24px;
+    font-size: 1.13rem;
+    line-height: 1.55;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .chip {
+    padding: 7px 15px;
+    border-radius: 999px;
+    background: var(--panel);
+    color: var(--ink);
+    font-weight: 800;
+    font-size: 0.8rem;
+  }
+
+  .chip.sky    { background: var(--sky);    color: var(--dark-text); }
+  .chip.orange { background: var(--orange); color: var(--dark-text); }
+  .chip.lime   { background: var(--lime);   color: var(--dark-text); }
+  .chip.pink   { background: var(--pink);   color: var(--dark-text); }
+
+  /* ---------- sektioner ---------- */
+
+  section {
+    margin-top: 46px;
+    padding: 26px 28px;
+    background: var(--panel);
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+  }
+
+  .sec-head {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin: 0 0 16px;
+  }
+
+  .tag {
+    width: 17px;
+    height: 17px;
+    flex: none;
+    border-radius: 6px;
+    transform: rotate(-8deg);
+  }
+
+  .tag.sky    { background: var(--sky); }
+  .tag.orange { background: var(--orange); }
+  .tag.coral  { background: var(--coral); }
+  .tag.teal   { background: var(--teal); }
+  .tag.lime   { background: var(--lime); }
+  .tag.blue   { background: var(--blue); }
+  .tag.pink   { background: var(--pink); }
+  .tag.purple { background: var(--purple); }
+  .tag.olive  { background: var(--olive); }
+  .tag.yellow { background: var(--yellow); }
+
+  h2 {
+    margin: 0;
+    font-family: "Baloo 2", "Arial Rounded MT Bold", sans-serif;
+    font-weight: 800;
+    font-size: 1.65rem;
+    line-height: 1.1;
+  }
+
+  h3 {
+    margin: 0 0 6px;
+    font-family: "Baloo 2", "Arial Rounded MT Bold", sans-serif;
+    font-weight: 700;
+    font-size: 1.06rem;
+    line-height: 1.25;
+  }
+
+  p { margin: 0 0 12px; }
+  p:last-child { margin-bottom: 0; }
+
+  section > p { color: var(--ink); }
+  .dim { color: var(--muted); }
+
+  /* ---------- andringspanelen ---------- */
+
+  .panel {
+    margin-top: 40px;
+    padding: 28px 30px;
+    border-radius: var(--radius);
+    background: var(--bubble);
+    color: var(--dark-text);
+  }
+
+  .panel .sec-head h2 { color: var(--dark-text); }
+  .panel p { color: var(--dark-text); }
+
+  .panel ul {
+    margin: 0;
+    padding-left: 20px;
+  }
+
+  .panel li { margin-bottom: 10px; }
+  .panel li:last-child { margin-bottom: 0; }
+
+  /* ---------- faktarutnat ---------- */
+
+  .facts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .fact {
+    padding: 15px 18px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--line);
+  }
+
+  .fact strong { display: block; margin-bottom: 3px; }
+  .fact span { color: var(--muted); font-size: 0.93rem; }
+
+  /* ---------- designriktningen ---------- */
+
+  .hero {
+    margin: 40px 0 0;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+
+  .banner-fig { margin: 18px 0 0; }
+
+  .banner-fig img {
+    border-radius: 16px;
+    border: 1px solid var(--line);
+  }
+
+  .banner-fig figcaption {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.86rem;
+  }
+
+  .swatches {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 18px 0 4px;
+  }
+
+  .swatch { width: 88px; }
+
+  .swatch i {
+    display: block;
+    height: 42px;
+    border-radius: 13px;
+  }
+
+  .swatch b {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .swatch span {
+    color: var(--muted);
+    font-size: 0.72rem;
+    font-weight: 700;
+  }
+
+  .fontpair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .fontcard {
+    padding: 16px 18px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--line);
+  }
+
+  .fontcard .sample {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 1.5rem;
+    line-height: 1.15;
+  }
+
+  .fontcard .sample.rounded { font-family: "Baloo 2", sans-serif; font-weight: 800; }
+  .fontcard .sample.body { font-weight: 700; }
+
+  .fontcard span { color: var(--muted); font-size: 0.88rem; }
+
+  /* ---------- fyra block ---------- */
+
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .card {
+    padding: 18px 20px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--line);
+  }
+
+  .card h3 { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .card p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+
+  /* ---------- granskningsflodet ---------- */
+
+  .flow {
+    position: relative;
+    display: grid;
+    gap: 14px;
+    margin-top: 6px;
+  }
+
+  .flow::before {
+    content: "";
+    position: absolute;
+    left: 21px;
+    top: 28px;
+    bottom: 28px;
+    border-left: 3px dashed rgba(255, 255, 255, 0.16);
+  }
+
+  .step {
+    position: relative;
+    display: grid;
+    grid-template-columns: 46px 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+
+  .step-no {
+    position: relative;
+    z-index: 1;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-family: "Baloo 2", sans-serif;
+    font-weight: 800;
+    font-size: 1.3rem;
+    color: var(--dark-text);
+  }
+
+  .step-no.c1 { background: var(--bubble); }
+  .step-no.c2 { background: var(--orange); }
+  .step-no.c3 { background: var(--lime); }
+  .step-no.c4 { background: var(--pink); }
+  .step-no.c5 { background: var(--purple); }
+  .step-no.c6 { background: var(--yellow); }
+
+  .step h3 { margin-bottom: 3px; }
+  .step p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+
+  .sideline {
+    margin-top: 18px;
+    padding: 14px 18px;
+    border: 2px dashed var(--teal);
+    border-radius: 16px;
+    font-size: 0.93rem;
+    color: var(--muted);
+  }
+
+  .sideline strong { color: var(--ink); }
+
+  /* ---------- uppgiftstabell ---------- */
+
+  .tablecard {
+    border-radius: 16px;
+    border: 1px solid var(--line);
+    overflow: hidden;
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 560px;
+  }
+
+  th {
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  td {
+    padding: 13px 16px;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.94rem;
+    vertical-align: top;
+  }
+
+  tr:last-child td { border-bottom: 0; }
+
+  .pill {
+    display: inline-block;
+    padding: 4px 11px;
+    border-radius: 999px;
+    font-size: 0.74rem;
+    font-weight: 800;
+    color: var(--dark-text);
+    white-space: nowrap;
+  }
+
+  .pill.wait   { background: var(--yellow); }
+  .pill.open   { background: var(--pink); }
+  .pill.track  { background: var(--coral); }
+
+  td .why { display: block; margin-top: 3px; color: var(--muted); font-size: 0.85rem; }
+
+  /* ---------- krav ---------- */
+
+  .reqs { list-style: none; margin: 0; padding: 0; }
+
+  .reqs li {
+    display: grid;
+    grid-template-columns: 26px 1fr;
+    gap: 14px;
+    align-items: start;
+    padding: 12px 4px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .reqs li:last-child { border-bottom: 0; }
+
+  .box {
+    width: 21px;
+    height: 21px;
+    margin-top: 3px;
+    border-radius: 7px;
+    background: var(--lime);
+  }
+
+  .reqs strong { display: block; margin-bottom: 1px; }
+  .reqs span { color: var(--muted); font-size: 0.93rem; }
+
+  /* ---------- team ---------- */
+
+  .team {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .person {
+    padding: 18px 20px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--line);
+  }
+
+  .person h3 {
+    margin-bottom: 9px;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .person ul { margin: 0; padding-left: 16px; }
+  .person li { margin-bottom: 6px; font-size: 0.9rem; color: var(--muted); }
+  .person li:last-child { margin-bottom: 0; }
+
+  .pointers {
+    margin-top: 14px;
+    padding: 13px 17px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--line);
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+
+  .pointers strong { color: var(--ink); }
+
+  /* ---------- tidsplan ---------- */
+
+  .day {
+    display: grid;
+    grid-template-columns: 175px 1fr;
+    gap: 16px;
+    padding: 12px 4px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .day:last-child { border-bottom: 0; }
+
+  .day time {
+    font-weight: 800;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--orange);
+    padding-top: 2px;
+  }
+
+  .day p { margin: 0; font-size: 0.95rem; }
+
+  /* ---------- oppna fragor ---------- */
+
+  .open {
+    padding: 22px 26px;
+    border: 2px dashed var(--pink);
+    border-radius: 18px;
+    background: rgba(240, 109, 133, 0.06);
+  }
+
+  .open ul { margin: 0; padding-left: 18px; }
+  .open li { margin-bottom: 10px; font-size: 0.95rem; }
+  .open li:last-child { margin-bottom: 0; }
+  .open strong { color: var(--pink); }
+
+  /* ---------- nasta steg ---------- */
+
+  .next ol { margin: 0; padding-left: 22px; }
+  .next li { margin-bottom: 11px; }
+  .next li:last-child { margin-bottom: 0; }
+  .next strong { font-weight: 800; }
+
+  footer {
+    margin-top: 44px;
+    padding: 0 6px;
+    color: var(--muted);
+    font-size: 0.84rem;
+  }
+
+  @media (max-width: 640px) {
+    .facts, .cards, .fontpair, .team { grid-template-columns: 1fr; }
+    .day { grid-template-columns: 1fr; gap: 3px; }
+    section { padding: 22px 20px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+<main class="doc">
+
+  <header>
+    <p class="kicker">Plan v3 · uppdaterad 1 september · väntar på ditt ok</p>
+    <h1>Den nya uppgiftssidan</h1>
+    <p class="lede">Uppgiftsteamets förslag till ChasHacks egen sida: ett rutnät med poänguppgifter,
+    ett granskningsflöde som fungerar i verkligheten och en liveleaderboard på väggen.
+    Designen är hämtad direkt ur de nya ChasHack-bannrarna, helt löst från gamla
+    hemsidans utseende.</p>
+    <ul class="chips">
+      <li class="chip sky">Design: ur bannrarna</li>
+      <li class="chip orange">Team: Anton, Victoria, Theo</li>
+      <li class="chip lime">Avstämning: mån 7 sep</li>
+      <li class="chip pink">ChasHack: fre 11 sep</li>
+    </ul>
+
+    <figure class="hero">
+      <img src="sources/assets/chasHack-header.png" alt="ChasHack-logotypen i glansiga bubbelbokstäver, omgiven av färgglada former på mörk botten">
+    </figure>
+  </header>
+
+  <div class="panel">
+    <div class="sec-head">
+      <span class="tag teal" aria-hidden="true"></span>
+      <h2>Vad som ändrats sedan v1</h2>
+    </div>
+    <ul>
+      <li><strong>Designen kommer från bannrarna.</strong> Mörk botten, bubbeligt och
+      färgstarkt, precis som logotypen och formerna i assetsen. Ingen koppling till gamla
+      hemsidans stylesheet. Den här planen är tecknad i den stilen så du ser den på riktigt.</li>
+      <li><strong>Granskningsflödet är uttänkt i verkligheten.</strong> Ny sektion: laget
+      bockar av klara uppgifter och lämnar in sin repo-länk en gång, ett annat lag right
+      via länken och godkänner per uppgift. Inget inlämnande per poäng.</li>
+      <li><strong>Tips &amp; tricks är ute.</strong> Inte trions del: tips-remsan är
+      borttagen och ansvar ligger hos den grupp som äger biten. Pekarna till bollpartners
+      är kvar.</li>
+      <li><strong>Uppgiftslistorna väntar på inklistring.</strong> De två Discord-listorna
+      (cirka 25 och 24 rader) finns bara i chatten, och .NET spikas av Victoria &amp; Theo.
+      Båda har reserverad plats i planen.</li>
+      <li><strong>Lagen är indelade i förväg.</strong> Start-blocket utgår från färdiga
+      lag: hitta gruppen, välj lagnamn tillsammans, skriv in det på sidan. Ingen
+      självvald lagbildning.</li>
+    </ul>
+  </div>
+
+  <section>
+    <div class="sec-head">
+      <span class="tag sky" aria-hidden="true"></span>
+      <h2>Läget från mötet 31 augusti</h2>
+    </div>
+    <div class="facts">
+      <div class="fact"><strong>Stor uppslutning</strong><span>Minst 100 till 110 deltagare
+      förväntas, lokalens gräns är 150. 175 stickers är beställda.</span></div>
+      <div class="fact"><strong>Nybörjarpublik</strong><span>Ettorna kan knappt vad en
+      HTML-tagg är. Allt måste vara nybörjarvänligt, inget överkomplicerat.</span></div>
+      <div class="fact"><strong>Alla spår ska finnas</strong><span>Få uppgifter per
+      programspår räcker. .NET är känsligast: ettorna har ännu inte börjat med .NET.</span></div>
+      <div class="fact"><strong>Rättbart utifrån</strong><span>Varje uppgift ska gå att se
+      och rätta utifrån: ett annat lag godkänner beviset.</span></div>
+      <div class="fact"><strong>Live leaderboard</strong><span>Beslutat. Lagen fyller i via
+      webben och en vägg visar alla lag live. Anton bygger den.</span></div>
+      <div class="fact"><strong>Tips &amp; tricks: annan del</strong><span>Ligger på en egen
+      sida och ägs utanför trion. Kort Git-workshop (cirka 10 min) vid sidan av, enligt
+      mötet.</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="tag purple" aria-hidden="true"></span>
+      <h2>Designriktningen: bannrarna</h2>
+    </div>
+    <p>Allt formspråk tas ur tre assets i <code>sources/assets</code>: headern med
+    bubbellogotypen, bakgrunden med de utspridda formerna och den breda eventbannern.
+    Ingenting hämtas från gamla hemsidans utseende.</p>
+
+    <figure class="banner-fig">
+      <img src="sources/assets/Chas_Hack_event_banner.png" alt="Bred ChasHack-banner med bubbellogotypen och färgglada former i orange, rosa, blått, lila, lime och gult">
+      <figcaption>Den breda bannern: används till vägg och sociala kanaler. Bakgrunden bakom
+      den här planen är samma familj av former, tonad ned för läsbarhet.</figcaption>
+    </figure>
+
+    <div class="swatches">
+      <div class="swatch"><i style="background:#a9dcf6"></i><b>Bubbelblå</b><span>#A9DCF6</span></div>
+      <div class="swatch"><i style="background:#7ec6ec"></i><b>Himmel</b><span>#7EC6EC</span></div>
+      <div class="swatch"><i style="background:#f2a55b"></i><b>Orange</b><span>#F2A55B</span></div>
+      <div class="swatch"><i style="background:#ec8a7b"></i><b>Korall</b><span>#EC8A7B</span></div>
+      <div class="swatch"><i style="background:#7ea896"></i><b>Teal</b><span>#7EA896</span></div>
+      <div class="swatch"><i style="background:#b6d26e"></i><b>Lime</b><span>#B6D26E</span></div>
+      <div class="swatch"><i style="background:#4d63ee"></i><b>Blå</b><span>#4D63EE</span></div>
+      <div class="swatch"><i style="background:#f06d85"></i><b>Rosa</b><span>#F06D85</span></div>
+      <div class="swatch"><i style="background:#c792d8"></i><b>Lila</b><span>#C792D8</span></div>
+      <div class="swatch"><i style="background:#c6b54f"></i><b>Oliv</b><span>#C6B54F</span></div>
+      <div class="swatch"><i style="background:#ecd15e"></i><b>Gul</b><span>#ECD15E</span></div>
+    </div>
+    <p class="dim" style="font-size:0.88rem">Färgvärdena är tagna ur bannrarna med ögat;
+    exakta värden hämtas ur bildfilerna när sidan byggs.</p>
+
+    <div class="fontpair">
+      <div class="fontcard">
+        <span class="sample rounded">Bubbelrubriker</span>
+        <span><strong>Baloo 2</strong> för rubriker: rund och släkt med bokstäverna i
+        logotypen.</span>
+      </div>
+      <div class="fontcard">
+        <span class="sample body">Lättläst löptext</span>
+        <span><strong>Nunito</strong> för text: rundad, öppen och nybörjarvänlig. Ingen
+        monospace, den hör hemma i terminalen.</span>
+      </div>
+    </div>
+
+    <p class="sideline"><strong>Formspråket i korthet:</strong> mörk kolbotten, stora runda
+    ytor, runta hörn överallt och inga vassa kanter. Färgerna jobbar i logotyp, kanter,
+    rubriker och knappar medan texten ligger på lugna mörka ytor. Lekfullt som bannern,
+    läsbart som en verktygssida.</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="tag orange" aria-hidden="true"></span>
+      <h2>Sidans fyra block</h2>
+    </div>
+    <div class="cards">
+      <article class="card">
+        <h3><span class="tag sky" aria-hidden="true"></span>Start</h3>
+        <p>Indelade lag: deltagarna delas in i förväg, lagnamnet väljer laget själva.
+        Sedan konto, mall och klon. Kort: igång inom minuter. Praktiska rader som egen
+        mat hör hit.</p>
+      </article>
+      <article class="card">
+        <h3><span class="tag lime" aria-hidden="true"></span>Uppgiftsrutnät</h3>
+        <p>Ett kort per uppgift: spår, titel, fasta poäng, nivå och exakt vad som räknas
+        som bevis. Rutnätet är trions kärnjobb.</p>
+      </article>
+      <article class="card">
+        <h3><span class="tag pink" aria-hidden="true"></span>Granskning</h3>
+        <p>En inlämning per lag: länk till repo och sida. Ett annat lag right via länken
+        och godkänner avbockade uppgifter mot beviskraven. Flödet i detalj nedan.</p>
+      </article>
+      <article class="card">
+        <h3><span class="tag yellow" aria-hidden="true"></span>Leaderboard</h3>
+        <p>Liveväggen: ställningen räknas om varje gång en rättare godkänner ett bevis.
+        Alla lag ser samma sida.</p>
+      </article>
+    </div>
+    <p class="pointers"><strong>Bollpartners utanför teamet:</strong> Moises (React),
+    Veronica/Ilona (UX) och Ryan (design) pekades ut som hjälp att hämta gratis, enligt
+    mötet.</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="tag coral" aria-hidden="true"></span>
+      <h2>Granskningsflödet i verkligheten</h2>
+    </div>
+    <p>Kärnan i din feedback: beviset är repot eller den publicerade sidan, inte ett
+    formulär per poäng. Laget lämnar in en länk en gång, och ett annat lag right via
+    den. Så går det till:</p>
+    <div class="flow">
+      <div class="step">
+        <span class="step-no c1" aria-hidden="true">1</span>
+        <div>
+          <h3>Laget bygger och bockar</h3>
+          <p>Allt arbete samlas i lagets repo. Klar uppgift bockas av i rutnätet på sidan:
+          en självcheck, ingen inlämning per poäng. Varje uppgift har ett beviskrav som
+          går att kolla utifrån: en URL, en commit, en fil i repot.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-no c2" aria-hidden="true">2</span>
+        <div>
+          <h3>En inlämning per lag</h3>
+          <p>Laget lämnar in sin repo-länk, gärna plus den publicerade sidan. En gång,
+          uppdateras bara om länken ändras. Tar under en minut.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-no c3" aria-hidden="true">3</span>
+        <div>
+          <h3>Inlämningen hamnar i granskningskön</h3>
+          <p>Kön sorterar äldst först. Ett lag kan aldrig granska sitt eget lag.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-no c4" aria-hidden="true">4</span>
+        <div>
+          <h3>Rättarlaget kollar via länken</h3>
+          <p>Rättvyn visar lagets avbockade uppgifter med beviskraven, bredvid det som
+          faktiskt syns i repot och på sidan. Frågan per uppgift är bara: stämmer det,
+          ja eller nej.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-no c5" aria-hidden="true">5</span>
+        <div>
+          <h3>Godkänd eller underkänd</h3>
+          <p>Godkänn: poängen räknas in på leaderboarden direkt, gärna flera i samma veva.
+          Underkänn: en kort kommentar om vad som saknas, och laget bockar om när det är
+          fixat.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-no c6" aria-hidden="true">6</span>
+        <div>
+          <h3>Oenighet döms av en arrangör</h3>
+          <p>Kommer de två lagen inte överens tittar en arrangör och dömer slutgiltigt.
+          Poängen följer alltid beslutet.</p>
+        </div>
+      </div>
+    </div>
+    <p class="sideline"><strong>Varför det inte köar ihop:</strong> en inlämning per lag i
+    stället för en per uppgift, och rättarlaget kan godkänna flera avbockningar i samma
+    veva. Rättningen bedömer beviset i repot, inte stil, och fasta poäng betyder att
+    rättarna aldrig lägger till eller drar av något.</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="tag lime" aria-hidden="true"></span>
+      <h2>Uppgifterna: var de står</h2>
+    </div>
+    <p>Antons två Discord-listor (cirka 25 och 24 rader) är insamlade men ligger bara i
+    chatten och har inte kommit in i det här dokumentet än. Klistra in dem, så sorteras
+    uppgifterna in i rutnätet med spår, poäng och beviskrav.</p>
+    <div class="tablecard">
+      <table>
+        <thead>
+          <tr><th>Spår</th><th>Underlag</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Frontend, HTML &amp; CSS</td>
+            <td>Discord-lista hos Anton</td>
+            <td><span class="pill wait">Väntar på inklistring</span></td>
+          </tr>
+          <tr>
+            <td>JavaScript</td>
+            <td>Samma lista</td>
+            <td><span class="pill wait">Väntar på inklistring</span></td>
+          </tr>
+          <tr>
+            <td>UX</td>
+            <td>Plockas ur listorna</td>
+            <td><span class="pill open">Öppet</span></td>
+          </tr>
+          <tr>
+            <td>DevOps</td>
+            <td>Anton, ur listorna</td>
+            <td><span class="pill wait">Väntar på inklistring</span></td>
+          </tr>
+          <tr>
+            <td>.NET</td>
+            <td>Victoria &amp; Theo
+            <span class="why">Ettorna har inte börjat .NET, håll supertönt.</span></td>
+            <td><span class="pill track">Ej spikat</span></td>
+          </tr>
+          <tr>
+            <td>Socialt &amp; LinkedIn</td>
+            <td>Ur listorna, med mötets krav på konkreta bevis</td>
+            <td><span class="pill open">Öppet</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="tag teal" aria-hidden="true"></span>
+      <h2>Kraven från mötet</h2>
+    </div>
+    <ul class="reqs">
+      <li><span class="box" aria-hidden="true"></span><div><strong>Nybörjarnivå</strong>
+      <span>Inga förkunskaper krävs; varje uppgift visar hur man börjar, ett steg i
+      taget.</span></div></li>
+      <li><span class="box" aria-hidden="true"></span><div><strong>Alla programspår</strong>
+      <span>Minst en uppgift per spår: frontend, UX, JavaScript, DevOps och .NET.</span></div></li>
+      <li><span class="box" aria-hidden="true"></span><div><strong>Rättbart utifrån</strong>
+      <span>Varje uppgift har ett konkret bevis som ett annat lag kan se och godkänna på
+      egen hand.</span></div></li>
+      <li><span class="box" aria-hidden="true"></span><div><strong>Fasta poäng</strong>
+      <span>Poängen står på kortet. Granskarlaget räknar bara godkända uppgifter, inga
+      egna poäng.</span></div></li>
+      <li><span class="box" aria-hidden="true"></span><div><strong>Socialt med bevis</strong>
+      <span>Lagbild, intervju av lagkompis och LinkedIn-uppgifter, alla med konkreta
+      bevis.</span></div></li>
+      <li><span class="box" aria-hidden="true"></span><div><strong>Live leaderboard</strong>
+      <span>Lagen fyller i via webben; ställningen uppdateras automatiskt under
+      dagen.</span></div></li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="tag blue" aria-hidden="true"></span>
+      <h2>Trion står för det här</h2>
+    </div>
+    <div class="team">
+      <article class="person">
+        <h3>Anton</h3>
+        <ul>
+          <li>Driver och håller ihop teamet</li>
+          <li>Tekniken bakom sidan och leaderboarden</li>
+          <li>DevOps- och nätverksuppgifter</li>
+          <li>Briefar Theo (missade mötet)</li>
+        </ul>
+      </article>
+      <article class="person">
+        <h3>Victoria</h3>
+        <ul>
+          <li>.NET-uppgifterna, tillsammans med Theo</li>
+          <li>Beviskraven för spårsuppgifterna</li>
+        </ul>
+      </article>
+      <article class="person">
+        <h3>Theo</h3>
+        <ul>
+          <li>.NET-uppgifterna, tillsammans med Victoria</li>
+          <li>Briefas av Anton inför 7 sep</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="tag yellow" aria-hidden="true"></span>
+      <h2>Tidsplanen</h2>
+    </div>
+    <div class="day"><time>Tis-tor · 1-3 sep</time><p>Teamet spikar uppgifterna: titlar,
+    poäng och bevis. Victoria &amp; Theo drar .NET-spåret.</p></div>
+    <div class="day"><time>Fre · 4 sep</time><p>Uppgiftsrutnät och beviskrav på plats;
+    sidans skelett byggt.</p></div>
+    <div class="day"><time>Helg · 5-6 sep</time><p>Leaderboard-flödet testat, texter
+    polerade.</p></div>
+    <div class="day"><time>Mån · 7 sep</time><p>Sista avstämningen: sidan visas för hela
+    arrangörsgruppen, grupperna får säga sin mening, teamet bestämmer.</p></div>
+    <div class="day"><time>Tis-tors · 8-10 sep</time><p>Justeringar efter avstämningen;
+    gärna en snabbtest med ett par ettor.</p></div>
+    <div class="day"><time>Fre · 11 sep</time><p>ChasHack 09-16. Sidan är dagen
+    arbetsyta.</p></div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="tag pink" aria-hidden="true"></span>
+      <h2>Öppna frågor, påverkar inte bygget</h2>
+    </div>
+    <div class="open">
+      <ul>
+        <li><strong>Obligatoriskt eller frivilligt?</strong> Lärare har skrivit
+        obligatoriskt; Sandra sägs ha sagt motsatsen. Påverkar tonen i inbjudan, inte
+        sidan.</li>
+        <li><strong>Namnet.</strong> Riktningen är befintlig loggan ("For Wookies"/kycklingen)
+        i stället för nya förslag. Bekräftas av dig.</li>
+        <li><strong>Mat.</strong> Inbjudan ska säga att man tar med eller köper egen mat,
+        kan nämnas i Start-blocket. Upplägget kristalliseras närmare dagen.</li>
+        <li><strong>Profilbilder.</strong> Någon vill äga LinkedIn-profilbildsbitet med
+        telefon: bekräfta vem, så får det en plats i granskningsflödet.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="tag olive" aria-hidden="true"></span>
+      <h2>Nästa steg</h2>
+    </div>
+    <ol class="next">
+      <li><strong>Klistra in de två Discord-listorna.</strong> Två minuter för dig, hela
+      grunden för rutnätet: så sorteras uppgifterna in med spår, poäng och beviskrav.</li>
+      <li><strong>Victoria &amp; Theo spikar .NET-uppgifterna.</strong> Anton briefar Theo
+      innan måndagen 7 sep.</li>
+      <li><strong>Första versionen finns:</strong> uppgiftssida.html byggd i bannrdesignen
+      med hela flödet (bocka, lämna in repo, granska, topplista och väggläge), separat
+      från webbprototypen i <code>web/</code>. Justeras efter din granskning.</li>
+      <li><strong>Inget är commitat:</strong> plan v2 ligger orörd i arbetskatalogen och
+      väntar på ditt ok, precis som v1 gjorde.</li>
+    </ol>
+  </section>
+
+  <footer>
+    Underlag: mötet 31 augusti 2026 (råtranskript, sammanfattning, beslutslogg) och din
+    feedback i update-plan.txt samma kväll. Grupperna ger riktning, trion bestämmer.
+  </footer>
+
+</main>
+</body>
+</html>
