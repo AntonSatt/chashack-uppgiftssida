@@ -14,7 +14,8 @@ interna arkiv-repot, inte här.
 - `plan-ny-uppgiftssida.html` - plan v3: designriktning, granskningsflöde,
   tidsplan och öppna frågor. Granska i webbläsaren.
 - `sources/assets/` - ChasHack-bannrarna som hela designen bygger på.
-- `starter/` - utkast till skelett-repot som lagen ska klona på eventdagen.
+- `starter/` - utkastet som det publika skelett-repot byggdes på
+  (github.com/AntonSatt/chashack-starter).
 
 ## Kör lokalt
 
@@ -31,5 +32,6 @@ slippa filbehörigheter; allt körs i webbläsaren.
 - .NET-uppgifterna spikas av Victoria och Theo inför avstämningen 7 september.
 - Serverversion med delad state (riktig granskningskö och leaderboard) byggs
   när uppgifterna är på plats.
-- Publikt mall-repo för ettorna skapas av `starter/` när uppgifterna är
-  spikade. Det repot ska innehålla inget internt.
+- Publikt skelett-repo för ettorna: klart på
+  github.com/AntonSatt/chashack-starter (fork-flöde, minimalt, inget
+  internt innehåll).

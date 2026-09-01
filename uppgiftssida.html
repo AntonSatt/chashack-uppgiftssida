@@ -704,14 +704,15 @@
         </div>
         <div class="stepcard">
           <span class="step-no" style="background:var(--orange)" aria-hidden="true">2</span>
-          <h3>Skapa konto och repo</h3>
-          <p>Skapa ett gratis konto på github.com om ni inte har ett. Använd sedan knappen
-          "Use this template" på ChasHack-mallen så får ert lag en egen kopia.</p>
+          <h3>Forka start-repot</h3>
+          <p>Skapa ett gratis konto på github.com om ni inte har ett. Gå sedan till
+          <a href="https://github.com/AntonSatt/chashack-starter">github.com/AntonSatt/chashack-starter</a>
+          och tryck <strong>Fork</strong>: då får ert lag en egen kopia av start-repot.</p>
         </div>
         <div class="stepcard">
           <span class="step-no" style="background:var(--lime)" aria-hidden="true">3</span>
           <h3>Klona, bygg, bocka</h3>
-          <p>Ladda ner repot med <code>git clone</code>, bygg uppgifter tillsammans och
+          <p>Klona er fork med <code>git clone</code>, bygg uppgifter tillsammans och
           bocka av i rutnätet. Ett annat lag rättar er via er repo-länk.</p>
         </div>
       </div>
@@ -719,13 +720,16 @@
       <div class="howto">
         <h3>Snabbstart: från noll till repo</h3>
         <ol>
-          <li>En person i laget: skapa konto på <strong>github.com</strong> (det är gratis,
+          <li>Alla i laget skapar konto på <strong>github.com</strong> (det är gratis,
           bara en mejladress behövs).</li>
-          <li>Gå till ChasHack-mallen och klicka <strong>Use this template</strong>, välj
-          <strong>Create new repository</strong> och ge den lagets namn.</li>
-          <li>Kopiera länken till ert nya repo och kör:
-          <code>git clone REPO-LÄNK</code></li>
-          <li>Gå in i mappen: <code>cd REPOTS-NAMN</code>, öppna <code>index.html</code>
+          <li>En person: gå till
+          <a href="https://github.com/AntonSatt/chashack-starter">github.com/AntonSatt/chashack-starter</a>
+          och klicka <strong>Fork</strong> uppe till höger.</li>
+          <li>På er fork: <strong>Settings</strong>, <strong>Collaborators</strong>,
+          lägg till resten av laget så alla kan pusha.</li>
+          <li>Klicka den gröna <strong>Code</strong>-knappen på er fork, kopiera URL:en
+          och kör <code>git clone</code> med den.</li>
+          <li>Gå in i mappen: <code>cd chashack-starter</code>, öppna <code>index.html</code>
           och gör er första ändring tillsammans.</li>
           <li>Spara, committa och pusha: <code>git add .</code>,
           <code>git commit -m "första ändringen"</code>, <code>git push</code></li>
@@ -844,7 +848,7 @@ const TASKS = [
     proof: "Filen i repot och en förklaring i README vad en favicon är." },
   { id: "git-repo", track: "git", points: 10, level: "Lätt",
     title: "Publikt repo",
-    desc: "Skapa GitHub-konto, använd mallen och publicera lagets repo.",
+    desc: "Forka ChasHack-startrepot och lägg till lagkamraterna som collaborators.",
     proof: "Repo-URL som öppnas utan inloggning." },
   { id: "git-commits", track: "git", points: 10, level: "Lätt",
     title: "Committa ihop",
