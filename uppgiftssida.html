@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ChasHack: uppgiftssidan, v1</title>
+<title>ChasHack for rookies: uppgiftssidan</title>
+<link rel="icon" type="image/svg+xml" href="sources/assets/ChasHackForRookiesLogo.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap">
@@ -163,14 +164,15 @@
   /* ---------- block: start ---------- */
 
   .hero {
+    display: flex;
+    justify-content: center;
+    padding: 26px 16px;
     border-radius: var(--radius);
-    overflow: hidden;
     border: 1px solid var(--line);
     margin-bottom: 24px;
-    max-height: 210px;
   }
 
-  .hero img { width: 100%; object-fit: cover; }
+  .hero img { width: min(340px, 90%); height: auto; }
 
   h1 {
     margin: 0 0 10px;
@@ -687,7 +689,7 @@
 
     <section id="start">
       <div class="hero">
-        <img src="sources/assets/chasHack-header.png" alt="ChasHack-logotypen i bubbelbokstäver omgiven av färgglada former">
+        <img src="sources/assets/ChasHackForRookiesLogo.svg" alt="ChasHack for rookies-logotypen: bubbelbokstäver i blått, ett rosa band och en gul kyckling som kläcks ur sitt ägg">
       </div>
       <h1>Välkommen till uppgiftsdagen</h1>
       <p class="intro">Idag bygger ert lag en liten webbplats tillsammans, från första klicket

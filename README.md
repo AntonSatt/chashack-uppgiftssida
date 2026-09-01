@@ -1,5 +1,7 @@
 # ChasHack: uppgiftssidan
 
+<p align="center"><img src="sources/assets/ChasHackForRookiesLogo.svg" alt="ChasHack for rookies" width="220"></p>
+
 Bygg-repo för uppgiftsteamet (Anton, Victoria, Theo) inför ChasHack på Chas
 Academy, fredag 11 september 2026. Här finns bara det trion bygger: sidan,
 planen, design-assets och skelettet. Planeringsunderlag och möten ligger i det
@@ -13,7 +15,8 @@ interna arkiv-repot, inte här.
   inget skickas någonstans.
 - `plan-ny-uppgiftssida.html` - plan v3: designriktning, granskningsflöde,
   tidsplan och öppna frågor. Granska i webbläsaren.
-- `sources/assets/` - ChasHack-bannrarna som hela designen bygger på.
+- `sources/assets/` - ChasHack-bannrarna som hela designen bygger på, plus
+  trions överenskomna logga `ChasHackForRookiesLogo.svg` (transparent bakgrund).
 - `starter/` - utkastet som det publika skelett-repot byggdes på
   (github.com/AntonSatt/chashack-starter).
 
