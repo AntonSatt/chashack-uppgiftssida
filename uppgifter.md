@@ -8,7 +8,11 @@ Så redigerar du: öppna filen på GitHub, pennan uppe till höger, ändra,
 committa. En rad är en uppgift: bocka i rutan när den är spikad, radera
 raden om den stryks. Mall för nya rader ligger längst ner.
 
-Läge just nu: 19 uppgifter, 205p totalt.
+Läge just nu: 21 uppgifter, 250p totalt.
+
+Uppgiftsfilerna som deltagarna jobbar i ligger i `uppgifter/`, en mapp per
+kategori och en fil per uppgift. Ändras en rad här ska motsvarande fil ändras
+också.
 
 ## Frontend (3 uppgifter, 25p)
 
@@ -28,20 +32,22 @@ Läge just nu: 19 uppgifter, 205p totalt.
 - [ ] **Alt-text överallt** (10p, Lätt): Lägg till alt-text på alla bilder och förklara i README varför alt-text behövs. Bevis: kodraderna i repot plus förklaringen i README.
 - [ ] **Wireframe** (10p, Lätt): Rita en wireframe för lagets sida. Papper räcker, fota den. Bevis: bilden i repot.
 
-## JavaScript (2 uppgifter, 20p)
+## JavaScript (3 uppgifter, 45p)
 
 - [ ] **Klickräknare** (15p, Medel): Bygg en knapp som räknar antal klick och visar siffran på sidan. Bevis: koden i repot plus skärmdump eller GIF som visar att den fungerar.
 - [ ] **Programmeringsskämt** (5p, Lätt): Lägg in ett programmeringsskämt i sidfoten. Bevis: skämtet syns på sidan (skärmdump i repot).
+- [x] **Poängtavlan** (25p, Svår): Bygg klart poängtavlan i `uppgifter/javascript/uppgift-3-poangtavlan.html`: räkna ihop poängen för ikryssade uppgifter, uppdatera summan vid klick och spara i localStorage så den överlever en omladdning. Bevis: koden i repot plus skärmdump där några uppgifter är ikryssade och summan stämmer.
 
 ## DevOps (2 uppgifter, 30p)
 
 - [ ] **Deploya sidan** (20p, Medel): Publicera lagets sida med GitHub Pages. Bevis: fungerande URL som öppnas utan inloggning.
 - [ ] **Grupptillgång** (10p, Lätt): Bjud in alla i laget som collaborators på repot. Bevis: skärmdump på inställningen i repot.
 
-## .NET (2 platshållare, 30p) - spikas av Victoria och Theo
+## .NET (3 uppgifter, 50p)
 
-- [ ] **.NET-uppgift 1** (15p, Medel): Ettorna har inte börjat .NET, så här kommer en supertönt-nybörjaruppgift. Bevis: sätts av Victoria och Theo tillsammans med uppgiften.
-- [ ] **.NET-uppgift 2** (15p, Medel): Andra .NET-platshållaren, spikas av Victoria och Theo. Bevis: sätts av Victoria och Theo tillsammans med uppgiften.
+- [x] **Hej från .NET** (10p, Enkel): Kör `uppgifter/dotnet/uppgift-1-hej-fran-dotnet.cs` och ändra den så att den skriver ut lagnamn och allas namn. Bevis: den ändrade filen i repot plus skärmdump på terminalutskriften.
+- [x] **Gissa talet** (15p, Medel): Gör spelet i `uppgifter/dotnet/uppgift-2-gissa-talet.cs` spelbart - datorn ska avslöja om gissningen var för hög eller för låg, och räkna gissningarna. Bevis: den ändrade filen i repot plus skärmdump på en vunnen omgång.
+- [x] **Topplistan** (25p, Svår): Bygg om `uppgifter/dotnet/uppgift-3-topplistan.cs` till en riktig topplista: sortera lagen, ge topp tre medaljer, räkna ut total och snitt, och läs lagen från `lag.txt`. Bevis: den ändrade filen i repot plus skärmdump på den färdiga topplistan.
 
 ## Socialt (4 uppgifter, 40p)
 
@@ -52,7 +58,7 @@ Läge just nu: 19 uppgifter, 205p totalt.
 
 ## Öppna punkter
 
-- .NET-spåret: Victoria och Theo spikar de riktiga uppgifterna senast måndag 7 september.
+- .NET-spåret: klart. Alla tre uppgifterna ligger i `uppgifter/dotnet/` och är testade med .NET 10 (file-based apps, ingen csproj). Kvar: kontrollera att skoldatorerna har `dotnet` 10 eller senare före den 11:e.
 - Discord-listorna: ca 24 rader uppgifter väntar hos Anton, ska in här och sen in i rutnätet.
 - Nya uppgifter läggs fritt: en rad per uppgift, gärna med bevis så rättarlaget vet vad de ska titta efter.
 

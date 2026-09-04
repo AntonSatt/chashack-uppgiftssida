@@ -14,6 +14,9 @@ interna arkiv-repot, inte här.
 - `plan-ny-uppgiftssida.html` - plan v3: designriktning, granskningsflöde,
   tidsplan och öppna frågor. Granska i webbläsaren.
 - `sources/assets/` - ChasHack-bannrarna som hela designen bygger på.
+- `uppgifter/` - uppgiftsfilerna deltagarna jobbar i. En mapp per kategori,
+  en fil per uppgift, instruktionerna högst upp i varje fil. `.NET`-uppgifterna
+  körs som file-based apps (`dotnet run fil.cs`), utan projekt eller csproj.
 - `starter/` - utkastet som det publika skelett-repot byggdes på
   (github.com/AntonSatt/chashack-starter).
 
