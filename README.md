@@ -1,5 +1,7 @@
 # ChasHack: uppgiftssidan
 
+<p align="center"><img src="sources/assets/ChasHackForRookiesLogo.svg" alt="ChasHack for rookies" width="220"></p>
+
 Bygg-repo för uppgiftsteamet (Anton, Victoria, Theo) inför ChasHack på Chas
 Academy, fredag 11 september 2026. Här finns bara det trion bygger: sidan,
 planen, design-assets och skelettet. Planeringsunderlag och möten ligger i det

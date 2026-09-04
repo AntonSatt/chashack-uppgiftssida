@@ -1,0 +1,44 @@
+name: Deploya uppgiftssidan till Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - uppgiftssida.html
+      - sources/assets/**
+      - .github/workflows/deploy-pages.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Plocka ut det som ska publiceras
+        run: |
+          mkdir -p site/sources
+          cp uppgiftssida.html site/
+          cp uppgiftssida.html site/index.html
+          cp -r sources/assets site/sources/assets
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
