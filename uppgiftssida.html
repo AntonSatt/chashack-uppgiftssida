@@ -765,6 +765,247 @@
   @media (prefers-reduced-motion: reduce) {
     * { transition: none !important; animation: none !important; }
   }
+
+  /* ---------- lagidentitet och anslutning ---------- */
+
+  .teambox .joined {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 800;
+    color: var(--ink);
+  }
+
+  .teambox .swap {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    padding: 4px 11px;
+    font-size: 0.74rem;
+  }
+
+  .conn {
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: 999px;
+    padding: 2px 10px;
+    white-space: nowrap;
+  }
+
+  .conn.up   { background: rgba(182, 210, 110, 0.16); color: var(--lime); }
+  .conn.down { background: rgba(240, 109, 133, 0.18); color: var(--pink); }
+
+  .gate {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 26px 28px;
+    max-width: 34rem;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .gate p { color: var(--muted); }
+
+  .gate-row {
+    display: flex;
+    gap: 9px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+
+  .gate-row input {
+    flex: 1 1 12rem;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    background: var(--panel-soft);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 11px 18px;
+  }
+
+  .gate-row button { background: var(--bubble); color: var(--dark-text); }
+
+  .phase-banner {
+    border-radius: 14px;
+    padding: 12px 18px;
+    margin-bottom: 20px;
+    font-weight: 700;
+    font-size: 0.92rem;
+    border: 1px solid var(--line);
+  }
+
+  .phase-build  { background: rgba(126, 198, 236, 0.13); color: var(--sky); }
+  .phase-review { background: rgba(242, 165, 91, 0.14); color: var(--orange); }
+  .phase-done   { background: rgba(182, 210, 110, 0.14); color: var(--lime); }
+
+  .flash {
+    margin-top: 12px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    min-height: 1.2em;
+  }
+
+  .flash.ok  { color: var(--lime); }
+  .flash.err { color: var(--pink); }
+
+  /* ---------- granskning ---------- */
+
+  .target-card {
+    background: linear-gradient(120deg, rgba(77, 99, 238, 0.26), rgba(199, 146, 216, 0.18));
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 20px;
+  }
+
+  .target-card h3 { margin-bottom: 4px; font-size: 1.5rem; }
+  .target-card p { margin: 0 0 10px; color: var(--muted); }
+
+  .target-links { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  .target-links a {
+    background: var(--panel-soft);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 7px 15px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .rev-item {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px 20px;
+    margin-bottom: 10px;
+  }
+
+  .rev-item.done-ok { border-color: rgba(182, 210, 110, 0.45); }
+  .rev-item.done-no { border-color: rgba(240, 109, 133, 0.4); }
+
+  .rev-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+
+  .rev-head h3 { margin: 0; flex: 1 1 auto; font-size: 1.05rem; }
+
+  .rev-item .proof { margin-top: 8px; }
+
+  .rev-acts { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+  .rev-acts .ok { background: var(--lime); color: var(--dark-text); }
+  .rev-acts .no { background: var(--coral); color: var(--dark-text); }
+
+  .rev-acts .undo {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--line);
+  }
+
+  .rev-note {
+    flex: 1 1 14rem;
+    font-family: inherit;
+    font-size: 0.86rem;
+    color: var(--ink);
+    background: var(--panel-soft);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 8px 14px;
+  }
+
+  /* ---------- topplista med två poängkolumner ---------- */
+
+  .board-head {
+    display: grid;
+    grid-template-columns: 54px 1fr 7rem 7rem;
+    gap: 14px;
+    padding: 0 18px 6px;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    font-weight: 800;
+  }
+
+  .row {
+    grid-template-columns: 54px 1fr 7rem 7rem;
+  }
+
+  .score-approved {
+    font-family: "Baloo 2", sans-serif;
+    font-weight: 800;
+    font-size: 1.3rem;
+    color: var(--lime);
+    text-align: right;
+  }
+
+  .score-pending {
+    font-family: "Baloo 2", sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--yellow);
+    text-align: right;
+    opacity: 0.85;
+  }
+
+  .score-approved .unit, .score-pending .unit {
+    font-family: "Nunito", sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    opacity: 0.7;
+  }
+
+  /* ---------- admin ---------- */
+
+  .admin-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+
+  .admin-row { display: flex; gap: 9px; flex-wrap: wrap; margin-top: 12px; }
+
+  .admin-row input {
+    flex: 1 1 9rem;
+    font-family: inherit;
+    font-size: 0.9rem;
+    color: var(--ink);
+    background: var(--panel-soft);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 9px 15px;
+  }
+
+  .admin-row button { background: var(--bubble); color: var(--dark-text); }
+  .admin-row button.warn { background: var(--orange); color: var(--dark-text); }
+
+  .pair-list { margin-top: 14px; display: flex; flex-direction: column; gap: 6px; }
+
+  .pair {
+    background: var(--panel-soft);
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-size: 0.88rem;
+  }
+
+  .pair b { color: var(--bubble); }
+
+  @media (max-width: 760px) {
+    .admin-grid { grid-template-columns: 1fr; }
+    .board-head { display: none; }
+    .row { grid-template-columns: 44px 1fr auto; }
+    .score-pending { grid-column: 2 / -1; text-align: left; font-size: 0.9rem; }
+  }
 </style>
 </head>
 <body>
@@ -778,17 +1019,15 @@
           <span class="shapes" aria-hidden="true"><i></i><i></i><i></i></span>
           ChasHack for rookies
         </div>
-        <div class="teambox">
-          <label for="teamname">Ditt lag:</label>
-          <input id="teamname" type="text" maxlength="30" autocomplete="off" placeholder="Skriv lagnamnet">
-        </div>
+        <div class="teambox" id="teambox"></div>
       </div>
       <nav class="tabs" aria-label="Sektioner">
         <button data-go="start" aria-selected="true">Start</button>
         <button data-go="huvudspar" aria-selected="false">Huvudspåret</button>
         <button data-go="sidequests" aria-selected="false">Side quests</button>
-        <button data-go="ratta" aria-selected="false">Rätta</button>
+        <button data-go="granska" aria-selected="false">Granska</button>
         <button data-go="topplista" aria-selected="false">Topplista</button>
+        <button data-go="admin" aria-selected="false">Admin</button>
       </nav>
     </div>
   </div>
@@ -805,6 +1044,8 @@
       webbplats om ert lag, publicerad på nätet så att vem som helst kan öppna den.
       Huvudspåret tar er dit, steg för steg. Side quests är extrauppdrag ni plockar på
       er längs vägen för att göra sidan snyggare, roligare och värd fler poäng.</p>
+
+      <div id="gate-wrap"></div>
 
       <div class="steps">
         <div class="card">
@@ -846,10 +1087,12 @@
       </div>
 
       <div class="callout" style="border-left-color: var(--sky);">
-        <h3 style="color: var(--sky);">Bevis och rättning</h3>
-        <p>Varje uppgift säger vad rättarlaget tittar efter. När ni bockar av något
-        hamnar det i granskningskön. Poängen räknas när en rättare har godkänt det.
-        Lämna in repo-länken under <strong>Rätta</strong> så vet de var de ska leta.</p>
+        <h3 style="color: var(--sky);">Så granskas det</h3>
+        <p>Under dagen bockar ni av uppgifter allt eftersom. Poängen syns direkt på
+        topplistan som <strong>väntande</strong>.</p>
+        <p>I slutet av dagen får varje lag ett annat lag tilldelat. Då går ni in under
+        <strong>Granska</strong>, tittar på deras repo och sida, och godkänner eller
+        nekar varje uppgift. Godkända poäng är de som räknas till slut.</p>
       </div>
     </section>
 
@@ -884,46 +1127,63 @@
       <div class="grid" id="questgrid"></div>
     </section>
 
-    <section id="ratta" hidden>
-      <h2>Lämna in och rätta</h2>
-      <p class="intro">Här lämnar ni länken till lagets repo, och här ser rättarlaget
-      vad som väntar på granskning.</p>
-
-      <div class="subgrid">
-        <div class="panel">
-          <h3>Ert lags inlämning</h3>
-          <div class="subrow">
-            <input id="repo-url" type="url" placeholder="Repo-länk (https://github.com/lag/repo)" aria-label="Repo-länk">
-            <input id="live-url" type="url" placeholder="Publicerad sida, valfri (https://...)" aria-label="Publicerad sida">
-          </div>
-          <button class="subsend" id="subsend">Skicka till granskning</button>
-          <div class="substatus" id="substatus"></div>
-          <div class="queue" id="ownqueue"></div>
-        </div>
-
-        <div class="panel">
-          <h3>Rättarläge (demo)</h3>
-          <p class="desc">I den här prototypen ligger allt lokalt i webbläsaren. Nedan
-          simuleras ett annat lag så att ni ser hur granskningen fungerar.</p>
-          <div class="queue" id="queue"></div>
-        </div>
-      </div>
+    <section id="granska" hidden>
+      <h2>Granska</h2>
+      <div id="review-body"></div>
     </section>
 
     <section id="topplista" hidden>
       <h2>Topplistan</h2>
-      <p class="intro">Poäng avgör ordningen. Lag som inte gjort klart huvudspåret
-      visas med ett märke och kan inte vinna, hur många poäng de än har.</p>
+      <p class="intro">Uppdateras live. Gula siffror är poäng som väntar på granskning,
+      gröna är godkända. Det är de gröna som avgör till slut.</p>
+      <div class="board-head">
+        <span>#</span><span>Lag</span><span style="text-align:right">Godkänt</span><span style="text-align:right">Väntar</span>
+      </div>
       <div class="board" id="board"></div>
       <button class="walllink" id="openwall">Öppna väggläget</button>
+    </section>
+
+    <section id="admin" hidden>
+      <h2>Admin</h2>
+      <p class="intro">För arrangörerna. Kräver PIN.</p>
+
+      <div class="admin-grid">
+        <div class="panel">
+          <h3>Granskningspar</h3>
+          <p class="desc">Delar ut ett lag att granska till varje lag. Lagen läggs i en
+          slumpad ring, så ingen granskar sig själv och alla blir granskade en gång.
+          Kör den när alla lag är registrerade.</p>
+          <div class="admin-row">
+            <input id="admin-pin-1" type="password" placeholder="Admin-PIN" autocomplete="off">
+            <button id="do-assign">Dela ut</button>
+          </div>
+          <div class="flash" id="assign-flash"></div>
+          <div class="pair-list" id="pair-list"></div>
+        </div>
+
+        <div class="panel">
+          <h3>Fas</h3>
+          <p class="desc">Bygga = lagen jobbar och bockar av. Granska = granskningen är
+          öppen. Klart = allt låst, slutresultatet står fast.</p>
+          <div class="admin-row">
+            <input id="admin-pin-2" type="password" placeholder="Admin-PIN" autocomplete="off">
+          </div>
+          <div class="admin-row">
+            <button data-phase="build">Bygga</button>
+            <button data-phase="review" class="warn">Granska</button>
+            <button data-phase="done" class="warn">Klart</button>
+          </div>
+          <div class="flash" id="phase-flash"></div>
+        </div>
+      </div>
     </section>
 
   </main>
 
   <footer>
     <div class="wrap">
-      <span>ChasHack for rookies - uppgiftssidan. Allt sparas lokalt i din webbläsare.</span>
-      <button class="reset" id="reset">Nollställ demon</button>
+      <span id="footnote">ChasHack for rookies - uppgiftssidan.</span>
+      <button class="reset" id="reset">Lämna laget i den här webbläsaren</button>
     </div>
   </footer>
 
@@ -933,6 +1193,8 @@
   <h2>ChasHack: topplistan</h2>
   <div class="wall-board board wrap" id="wallboard"></div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 
 <script>
 "use strict";
@@ -1139,42 +1401,29 @@ var CATS = {
 };
 
 var ALL = MAIN.concat(QUESTS);
+
+/* ---------- anslutning ---------- */
+
+var SUPABASE_URL = "https://ybhqfvdilzsaauzoesgk.supabase.co";
+var SUPABASE_KEY = "sb_publishable_395XqRjMg5Ie3qGRpvTVRg_eTnhvB3U";
+var LS_TEAM = "chashack-rookies-team";
 var MAIN_TOTAL = MAIN.length;
 
-/* demolag så topplistan inte står tom */
-var DEMO_TEAMS = [
-  { name: "Kompilerar Kaffe", points: 180, mainDone: 12 },
-  { name: "Merge Conflicts",  points: 205, mainDone: 9 },
-  { name: "Team Kyckling",    points: 95,  mainDone: 6 }
-];
+var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-/* simulerat lag att öva rättning på */
-var SIM_TEAM = {
-  name: "Wookie Warriors",
-  basePoints: 60,
-  mainDone: 11,
-  claims: ["m03", "m04", "q01"]
-};
+/* All delad state kommer från databasen. Webbläsaren minns bara vilket lag
+   den här datorn tillhör. */
+var me = null;
+var phase = "build";
+var myClaims = {};
+var board = [];
+var pairs = [];
+var myTarget = null;
+var targetClaims = [];
+var online = false;
+var activeFilter = "all";
 
-/* ---------- state ---------- */
-
-var KEY = "chashack-rookies-v2";
-
-function fresh() {
-  return { team: "", repo: "", live: "", claimed: {}, approved: {}, denied: {}, simApproved: {} };
-}
-
-function load() {
-  try { return JSON.parse(localStorage.getItem(KEY)); } catch (e) { return null; }
-}
-
-function save() {
-  try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
-}
-
-var state = load() || fresh();
-
-/* ---------- hjälpare ---------- */
+/* ---------- små hjälpare ---------- */
 
 function el(tag, cls, text) {
   var node = document.createElement(tag);
@@ -1187,28 +1436,10 @@ function taskById(id) {
   return ALL.filter(function (t) { return t.id === id; })[0];
 }
 
-function myPoints() {
-  return ALL.reduce(function (sum, t) {
-    return sum + (state.approved[t.id] ? t.points : 0);
-  }, 0);
-}
-
-function mainDone() {
-  return MAIN.filter(function (t) { return state.approved[t.id]; }).length;
-}
-
-function eligible() {
-  return mainDone() === MAIN_TOTAL;
-}
-
 function levelBadge(level) {
   return el("span", "level " + LEVELS[level], level);
 }
 
-/* Ledtråden pekar ut rätt begrepp och vad man ska slå upp, men skriver aldrig
-   koden åt laget. Det finns med flit inget facit någonstans: ligger svaret en
-   klick bort frågar lagen varken varandra eller handledarna. Kör de fast finns
-   det handledare på plats. */
 function hintBlock(task) {
   var box = el("details", "hint");
   box.appendChild(el("summary", "", "Ledtråd"));
@@ -1218,37 +1449,262 @@ function hintBlock(task) {
 
 function proofBlock(task) {
   var proof = el("div", "proof");
-  proof.appendChild(el("strong", "", "Bevis - det här tittar rättarlaget efter"));
+  proof.appendChild(el("strong", "", "Bevis - det här tittar granskarna efter"));
   proof.appendChild(el("span", "", task.proof));
   return proof;
 }
 
+function flash(id, msg, ok) {
+  var box = document.getElementById(id);
+  if (!box) { return; }
+  box.className = "flash " + (ok ? "ok" : "err");
+  box.textContent = msg;
+}
+
+function setConn(up, msg) {
+  online = up;
+  var box = document.getElementById("conn");
+  if (box) {
+    box.className = "conn " + (up ? "up" : "down");
+    box.textContent = up ? "Ansluten" : (msg || "Ingen kontakt");
+  }
+}
+
+function saveTeam() {
+  try {
+    if (me) { localStorage.setItem(LS_TEAM, JSON.stringify(me)); }
+    else { localStorage.removeItem(LS_TEAM); }
+  } catch (e) {}
+}
+
+function loadTeamFromBrowser() {
+  try { return JSON.parse(localStorage.getItem(LS_TEAM)); } catch (e) { return null; }
+}
+
+function canClaim() { return phase === "build"; }
+function canReview() { return phase === "review"; }
+
+/* ---------- hämta data ---------- */
+
+async function loadPhase() {
+  var res = await sb.from("settings").select("value").eq("key", "phase").maybeSingle();
+  if (!res.error && res.data) { phase = res.data.value; }
+}
+
+async function loadMyClaims() {
+  myClaims = {};
+  if (!me) { return; }
+  var res = await sb.from("claims").select("*").eq("team_id", me.id);
+  if (res.error) { throw res.error; }
+  res.data.forEach(function (row) { myClaims[row.task_id] = row; });
+}
+
+async function loadBoard() {
+  var res = await sb.from("leaderboard").select("*");
+  if (res.error) { throw res.error; }
+  board = res.data;
+}
+
+async function loadPairs() {
+  var res = await sb
+    .from("assignments")
+    .select("reviewer_team_id, target_team_id, reviewer:teams!assignments_reviewer_team_id_fkey(name), target:teams!assignments_target_team_id_fkey(name)");
+  pairs = res.error ? [] : res.data;
+
+  myTarget = null;
+  if (me) {
+    var mine = pairs.filter(function (p) { return p.reviewer_team_id === me.id; })[0];
+    if (mine) {
+      var t = board.filter(function (b) { return b.id === mine.target_team_id; })[0];
+      myTarget = {
+        id: mine.target_team_id,
+        name: mine.target ? mine.target.name : (t ? t.name : "Okänt lag"),
+        repo_url: t ? t.repo_url : null,
+        live_url: t ? t.live_url : null
+      };
+    }
+  }
+}
+
+async function loadTargetClaims() {
+  targetClaims = [];
+  if (!myTarget) { return; }
+  var res = await sb.from("claims").select("*").eq("team_id", myTarget.id);
+  if (!res.error) { targetClaims = res.data; }
+}
+
+async function refresh() {
+  try {
+    await loadPhase();
+    await loadBoard();
+
+    /* Laget kan vara borttaget i databasen sedan den här webbläsaren gick med,
+       till exempel om arrangörerna nollställt inför dagen. Släpp det då, så att
+       lagvalet dyker upp igen i stället för att sidan låtsas att laget finns. */
+    if (me && !board.some(function (b) { return b.id === me.id; })) {
+      me = null;
+      saveTeam();
+    }
+
+    await loadMyClaims();
+    await loadPairs();
+    await loadTargetClaims();
+    setConn(true);
+  } catch (e) {
+    setConn(false, "Ingen kontakt");
+  }
+  renderAll();
+}
+
+/* ---------- live ---------- */
+
+var pending = null;
+
+function scheduleRefresh() {
+  clearTimeout(pending);
+  pending = setTimeout(refresh, 250);
+}
+
+function subscribe() {
+  sb.channel("chashack")
+    .on("postgres_changes", { event: "*", schema: "public", table: "claims" }, scheduleRefresh)
+    .on("postgres_changes", { event: "*", schema: "public", table: "teams" }, scheduleRefresh)
+    .on("postgres_changes", { event: "*", schema: "public", table: "assignments" }, scheduleRefresh)
+    .on("postgres_changes", { event: "*", schema: "public", table: "settings" }, scheduleRefresh)
+    .subscribe(function (status) {
+      if (status === "SUBSCRIBED") { setConn(true); }
+      if (status === "CHANNEL_ERROR" || status === "TIMED_OUT") { setConn(false, "Tappade kontakten"); }
+    });
+}
+
+/* ---------- lagidentitet ---------- */
+
+async function joinTeam(name) {
+  name = name.trim();
+  if (!name) { return; }
+
+  var found = await sb.from("teams").select("id, name").ilike("name", name).maybeSingle();
+  if (found.error) { flash("gate-flash", "Kunde inte nå servern.", false); return; }
+
+  if (found.data) {
+    me = { id: found.data.id, name: found.data.name };
+  } else {
+    var made = await sb.from("teams").insert({ name: name }).select("id, name").single();
+    if (made.error) {
+      flash("gate-flash", "Kunde inte skapa laget: " + made.error.message, false);
+      return;
+    }
+    me = { id: made.data.id, name: made.data.name };
+  }
+
+  saveTeam();
+  await refresh();
+}
+
+function leaveTeam() {
+  me = null;
+  saveTeam();
+  refresh();
+}
+
+function renderTeambox() {
+  var box = document.getElementById("teambox");
+  box.innerHTML = "";
+
+  var conn = el("span", "conn down", "Ingen kontakt");
+  conn.id = "conn";
+
+  if (me) {
+    var joined = el("div", "joined");
+    joined.appendChild(el("span", "", me.name));
+    var swap = el("button", "swap", "Byt lag");
+    swap.addEventListener("click", leaveTeam);
+    joined.appendChild(swap);
+    box.appendChild(joined);
+  } else {
+    box.appendChild(el("span", "", "Inget lag valt"));
+  }
+
+  box.appendChild(conn);
+  setConn(online);
+}
+
+function renderGate() {
+  var wrap = document.getElementById("gate-wrap");
+  wrap.innerHTML = "";
+  if (me) { return; }
+
+  var gate = el("div", "gate");
+  gate.appendChild(el("h3", "", "Vad heter ert lag?"));
+  gate.appendChild(el("p", "", "Skriv lagnamnet så kopplas den här datorn till laget. Finns namnet redan går ni med i det laget - så kan flera i laget jobba från olika datorer."));
+
+  var row = el("div", "gate-row");
+  var input = document.createElement("input");
+  input.type = "text";
+  input.maxLength = 30;
+  input.placeholder = "Lagnamn";
+  input.setAttribute("aria-label", "Lagnamn");
+
+  var btn = el("button", "", "Kör igång");
+  function go() { joinTeam(input.value); }
+  btn.addEventListener("click", go);
+  input.addEventListener("keydown", function (e) { if (e.key === "Enter") { go(); } });
+
+  row.appendChild(input);
+  row.appendChild(btn);
+  gate.appendChild(row);
+
+  var f = el("div", "flash");
+  f.id = "gate-flash";
+  gate.appendChild(f);
+
+  wrap.appendChild(gate);
+}
+
+/* ---------- bocka av ---------- */
+
+async function toggleClaim(task, on) {
+  if (!me || !canClaim()) { return; }
+
+  if (on) {
+    var res = await sb.from("claims").upsert({
+      team_id: me.id,
+      task_id: task.id,
+      points: task.points,
+      is_main: MAIN.indexOf(task) !== -1,
+      status: "pending",
+      note: null,
+      reviewed_by: null
+    }, { onConflict: "team_id,task_id" });
+    if (res.error) { setConn(false, "Kunde inte spara"); }
+  } else {
+    await sb.from("claims").delete().eq("team_id", me.id).eq("task_id", task.id);
+  }
+
+  await refresh();
+}
+
 function claimFoot(task) {
   var foot = el("div", "task-foot");
+  var claim = myClaims[task.id];
+  var status = claim ? claim.status : null;
 
   var label = el("label", "claim");
   var box = document.createElement("input");
   box.type = "checkbox";
-  box.checked = Boolean(state.claimed[task.id]);
-  box.disabled = Boolean(state.approved[task.id]);
+  box.checked = Boolean(claim);
+  box.disabled = !me || !canClaim() || status === "approved";
   box.setAttribute("aria-label", "Markera " + task.title + " som klar");
-  box.addEventListener("change", function () {
-    if (box.checked) {
-      state.claimed[task.id] = true;
-      delete state.denied[task.id];
-    } else {
-      delete state.claimed[task.id];
-    }
-    save();
-    renderAll();
-  });
+  box.addEventListener("change", function () { toggleClaim(task, box.checked); });
   label.appendChild(box);
   label.appendChild(el("span", "", "Klar"));
   foot.appendChild(label);
 
-  if (state.approved[task.id]) {
+  if (status === "approved") {
     foot.appendChild(el("span", "state-ok", "Godkänd - " + task.points + " p"));
-  } else if (state.claimed[task.id]) {
+  } else if (status === "rejected") {
+    foot.appendChild(el("span", "badge-locked", "Nekad - bocka av igen när det är fixat"));
+  } else if (status === "pending") {
     foot.appendChild(el("span", "state-wait", "Väntar på granskning"));
   }
 
@@ -1256,10 +1712,11 @@ function claimFoot(task) {
 }
 
 function deniedNote(task) {
-  if (!state.denied[task.id]) { return null; }
+  var claim = myClaims[task.id];
+  if (!claim || claim.status !== "rejected" || !claim.note) { return null; }
   var note = el("div", "denied-note");
-  note.appendChild(el("strong", "", "Underkänd: "));
-  note.appendChild(el("span", "", state.denied[task.id] + " Bocka av igen när det är fixat."));
+  note.appendChild(el("strong", "", "Granskarnas kommentar: "));
+  note.appendChild(el("span", "", claim.note));
   return note;
 }
 
@@ -1270,18 +1727,14 @@ function renderPath() {
   path.innerHTML = "";
 
   MAIN.forEach(function (task, i) {
+    var claim = myClaims[task.id];
     var step = el("div", "step");
-    if (state.approved[task.id]) {
-      step.className = "step is-done";
-    } else if (state.claimed[task.id]) {
-      step.className = "step is-claimed";
-    }
+    if (claim && claim.status === "approved") { step.className = "step is-done"; }
+    else if (claim) { step.className = "step is-claimed"; }
 
-    var dot = el("div", "step-dot", state.approved[task.id] ? "✓" : String(i + 1));
-    step.appendChild(dot);
+    step.appendChild(el("div", "step-dot", (claim && claim.status === "approved") ? "✓" : String(i + 1)));
 
     var card = el("div", "step-card");
-
     var head = el("div", "step-head");
     head.appendChild(el("h3", "", task.title));
     head.appendChild(levelBadge(task.level));
@@ -1301,28 +1754,44 @@ function renderPath() {
   });
 }
 
+function myRow() {
+  if (!me) { return null; }
+  return board.filter(function (b) { return b.id === me.id; })[0] || null;
+}
+
 function renderProgress() {
-  var done = mainDone();
+  var row = myRow();
+  var approved = row ? row.main_approved : 0;
+  var pendingMain = row ? row.main_pending : 0;
+  var done = approved;
   var pct = Math.round((done / MAIN_TOTAL) * 100);
 
   document.getElementById("fig-steps").textContent = done + "/" + MAIN_TOTAL;
-  document.getElementById("fig-points").textContent = myPoints() + " p";
+  document.getElementById("fig-points").textContent = (row ? row.approved_points : 0) + " p";
   document.getElementById("progressbar").style.width = pct + "%";
 
   var box = document.getElementById("eligibility");
-  if (eligible()) {
-    box.className = "eligibility open";
-    box.textContent = "Huvudspåret är klart. Ni är med i tävlingen - nu räknas varje extrapoäng.";
-  } else {
-    var kvar = MAIN_TOTAL - done;
+
+  if (!me) {
     box.className = "eligibility locked";
-    box.textContent = "Ni kan inte vinna än - " + kvar + (kvar === 1 ? " steg" : " steg") + " kvar i huvudspåret.";
+    box.textContent = "Skriv in lagnamnet högst upp för att börja bocka av.";
+    return;
+  }
+
+  if (done === MAIN_TOTAL) {
+    box.className = "eligibility open";
+    box.textContent = "Huvudspåret är godkänt. Ni är med i tävlingen - nu räknas varje extrapoäng.";
+  } else if (approved + pendingMain === MAIN_TOTAL) {
+    box.className = "eligibility locked";
+    box.textContent = "Alla tolv steg är inlämnade och väntar på granskning. Godkända: " + approved + "/" + MAIN_TOTAL + ".";
+  } else {
+    var kvar = MAIN_TOTAL - approved - pendingMain;
+    box.className = "eligibility locked";
+    box.textContent = "Ni kan inte vinna än - " + kvar + " steg kvar att bocka av i huvudspåret.";
   }
 }
 
 /* ---------- side quests ---------- */
-
-var activeFilter = "all";
 
 function renderFilters() {
   var box = document.getElementById("filters");
@@ -1354,14 +1823,10 @@ function renderQuests() {
     return activeFilter === "all" || q.cat === activeFilter;
   });
 
-  if (!list.length) {
-    grid.appendChild(el("div", "empty", "Inga side quests i den kategorin."));
-    return;
-  }
-
   list.forEach(function (task) {
+    var claim = myClaims[task.id];
     var card = el("article", "quest");
-    if (state.approved[task.id]) { card.className = "quest is-done"; }
+    if (claim && claim.status === "approved") { card.className = "quest is-done"; }
 
     var top = el("div", "quest-top");
     top.appendChild(el("span", "tag", CATS[task.cat]));
@@ -1382,171 +1847,147 @@ function renderQuests() {
   });
 }
 
-/* ---------- inlämning ---------- */
+/* ---------- granskning ---------- */
 
-var repoInput = document.getElementById("repo-url");
-var liveInput = document.getElementById("live-url");
-var subStatus = document.getElementById("substatus");
-
-function renderSubmission() {
-  repoInput.value = state.repo || "";
-  liveInput.value = state.live || "";
-  var waiting = ALL.filter(function (t) {
-    return state.claimed[t.id] && !state.approved[t.id];
-  }).length;
-  subStatus.textContent = state.repo
-    ? "Inlämnat. " + waiting + " uppgifter väntar på granskning."
-    : "Ingen repo-länk inlämnad än.";
+async function setClaimStatus(claim, status, note) {
+  var res = await sb.from("claims")
+    .update({ status: status, note: note || null, reviewed_by: me ? me.id : null })
+    .eq("id", claim.id);
+  if (res.error) { setConn(false, "Kunde inte spara"); }
+  await refresh();
 }
 
-document.getElementById("subsend").addEventListener("click", function () {
-  state.repo = repoInput.value.trim();
-  state.live = liveInput.value.trim();
-  save();
-  renderAll();
-});
+function phaseBanner() {
+  var b = el("div", "phase-banner phase-" + phase);
+  if (phase === "build") {
+    b.textContent = "Fas: bygga. Granskningen öppnar när arrangörerna delar ut granskningspar.";
+  } else if (phase === "review") {
+    b.textContent = "Fas: granskning pågår. Avbockningen är låst - nu bedömer ni varandra.";
+  } else {
+    b.textContent = "Fas: klart. Allt är låst och slutresultatet står fast.";
+  }
+  return b;
+}
 
-/* Egen kö. I skarp version godkänner en rättare på plats; här görs det lokalt
-   så att sidan går att prova hela vägen. */
-function renderOwnQueue() {
-  var box = document.getElementById("ownqueue");
-  box.innerHTML = "";
+function renderReview() {
+  var body = document.getElementById("review-body");
+  body.innerHTML = "";
+  body.appendChild(phaseBanner());
 
-  var waiting = ALL.filter(function (t) {
-    return state.claimed[t.id] && !state.approved[t.id];
-  });
-
-  if (!waiting.length) {
-    box.appendChild(el("div", "empty", "Inget väntar på granskning just nu."));
+  if (!me) {
+    body.appendChild(el("div", "empty", "Skriv in lagnamnet högst upp först."));
     return;
   }
 
-  var head = el("div", "rev-row");
-  var info = el("div");
-  info.appendChild(el("h3", "", waiting.length + " väntar på granskning"));
-  info.appendChild(el("p", "", "Rättarlaget godkänner på plats. Knappen här bredvid gör det åt er så att ni kan prova sidan."));
-  head.appendChild(info);
-
-  var acts = el("div", "acts");
-  var all = el("button", "ok", "Godkänn allt (demo)");
-  all.addEventListener("click", function () {
-    waiting.forEach(function (t) { state.approved[t.id] = true; });
-    save();
-    renderAll();
-  });
-  acts.appendChild(all);
-  head.appendChild(acts);
-  box.appendChild(head);
-
-  waiting.forEach(function (task) {
-    var row = el("div", "rev-row");
-
-    var left = el("div");
-    left.appendChild(el("h3", "", task.title));
-    left.appendChild(el("p", "", task.points + " p - " + task.proof));
-    row.appendChild(left);
-
-    var rowActs = el("div", "acts");
-
-    var ok = el("button", "ok", "Godkänn");
-    ok.addEventListener("click", function () {
-      state.approved[task.id] = true;
-      delete state.denied[task.id];
-      save();
-      renderAll();
-    });
-
-    var no = el("button", "no", "Underkänn");
-    no.addEventListener("click", function () {
-      delete state.claimed[task.id];
-      delete state.approved[task.id];
-      state.denied[task.id] = "Rättaren hittade inte beviset.";
-      save();
-      renderAll();
-    });
-
-    rowActs.appendChild(ok);
-    rowActs.appendChild(no);
-    row.appendChild(rowActs);
-    box.appendChild(row);
-  });
-}
-
-/* ---------- rättarläge (demo) ---------- */
-
-function simPoints() {
-  return SIM_TEAM.basePoints + SIM_TEAM.claims.reduce(function (sum, id) {
-    return sum + (state.simApproved[id] ? taskById(id).points : 0);
-  }, 0);
-}
-
-function renderQueue() {
-  var queue = document.getElementById("queue");
-  queue.innerHTML = "";
-
-  var left = SIM_TEAM.claims.filter(function (id) { return !state.simApproved[id]; });
-
-  if (!left.length) {
-    queue.appendChild(el("div", "empty", "Kön är tom. " + SIM_TEAM.name + " har fått allt granskat."));
+  if (!myTarget) {
+    body.appendChild(el("div", "empty", "Ni har inget lag att granska än. Arrangörerna delar ut granskningsparen i slutet av dagen."));
     return;
   }
 
-  left.forEach(function (id) {
-    var task = taskById(id);
-    var row = el("div", "rev-row");
+  var card = el("div", "target-card");
+  card.appendChild(el("p", "", "Ni granskar"));
+  card.appendChild(el("h3", "", myTarget.name));
 
-    var info = el("div");
-    info.appendChild(el("h3", "", task.title));
-    info.appendChild(el("p", "", SIM_TEAM.name + " - " + task.points + " p - " + task.proof));
-    row.appendChild(info);
+  var links = el("div", "target-links");
+  if (myTarget.repo_url) {
+    var a1 = el("a", "", "Öppna repot");
+    a1.href = myTarget.repo_url;
+    a1.target = "_blank";
+    a1.rel = "noopener";
+    links.appendChild(a1);
+  }
+  if (myTarget.live_url) {
+    var a2 = el("a", "", "Öppna deras sida");
+    a2.href = myTarget.live_url;
+    a2.target = "_blank";
+    a2.rel = "noopener";
+    links.appendChild(a2);
+  }
+  if (!links.children.length) {
+    links.appendChild(el("span", "", "Laget har inte lämnat några länkar."));
+  }
+  card.appendChild(links);
+  body.appendChild(card);
 
-    var acts = el("div", "acts");
-    var ok = el("button", "ok", "Godkänn");
-    ok.addEventListener("click", function () {
-      state.simApproved[id] = true;
-      save();
-      renderAll();
-    });
-    var no = el("button", "no", "Underkänn");
-    no.addEventListener("click", function () {
-      state.simApproved[id] = false;
-      save();
-      renderAll();
-    });
-    acts.appendChild(ok);
-    acts.appendChild(no);
-    row.appendChild(acts);
+  if (!targetClaims.length) {
+    body.appendChild(el("div", "empty", myTarget.name + " har inte bockat av något än."));
+    return;
+  }
 
-    queue.appendChild(row);
+  var order = ALL.map(function (t) { return t.id; });
+  var sorted = targetClaims.slice().sort(function (a, b) {
+    return order.indexOf(a.task_id) - order.indexOf(b.task_id);
+  });
+
+  var kvar = sorted.filter(function (c) { return c.status === "pending"; }).length;
+  body.appendChild(el("p", "intro", kvar + " av " + sorted.length + " kvar att bedöma."));
+
+  sorted.forEach(function (claim) {
+    var task = taskById(claim.task_id);
+    if (!task) { return; }
+
+    var item = el("div", "rev-item");
+    if (claim.status === "approved") { item.className = "rev-item done-ok"; }
+    if (claim.status === "rejected") { item.className = "rev-item done-no"; }
+
+    var head = el("div", "rev-head");
+    head.appendChild(el("h3", "", task.title));
+    head.appendChild(levelBadge(task.level));
+    head.appendChild(el("span", "points", task.points + " p"));
+    item.appendChild(head);
+
+    item.appendChild(el("p", "desc", task.desc));
+    item.appendChild(proofBlock(task));
+
+    if (claim.status === "approved") { item.appendChild(el("span", "state-ok", "Godkänd av er")); }
+    if (claim.status === "rejected") {
+      item.appendChild(el("span", "badge-locked", "Nekad" + (claim.note ? ": " + claim.note : "")));
+    }
+
+    if (canReview()) {
+      var acts = el("div", "rev-acts");
+
+      if (claim.status === "pending") {
+        var note = document.createElement("input");
+        note.className = "rev-note";
+        note.type = "text";
+        note.placeholder = "Kommentar vid nekad (valfritt)";
+        acts.appendChild(note);
+
+        var ok = el("button", "ok", "Godkänn");
+        ok.addEventListener("click", function () { setClaimStatus(claim, "approved", null); });
+        acts.appendChild(ok);
+
+        var no = el("button", "no", "Neka");
+        no.addEventListener("click", function () { setClaimStatus(claim, "rejected", note.value); });
+        acts.appendChild(no);
+      } else {
+        var undo = el("button", "undo", "Ångra bedömningen");
+        undo.addEventListener("click", function () { setClaimStatus(claim, "pending", null); });
+        acts.appendChild(undo);
+      }
+
+      item.appendChild(acts);
+    }
+
+    body.appendChild(item);
   });
 }
 
 /* ---------- topplista ---------- */
 
 function boardRows() {
-  var rows = DEMO_TEAMS.map(function (t) {
-    return { name: t.name, points: t.points, done: t.mainDone, me: false };
-  });
-
-  rows.push({
-    name: SIM_TEAM.name,
-    points: simPoints(),
-    done: SIM_TEAM.mainDone,
-    me: false
-  });
-
-  rows.push({
-    name: state.team || "Ert lag",
-    points: myPoints(),
-    done: mainDone(),
-    me: true
-  });
+  var rows = board.slice();
+  var strict = phase !== "build";
 
   rows.sort(function (a, b) {
-    var aOk = a.done === MAIN_TOTAL ? 1 : 0;
-    var bOk = b.done === MAIN_TOTAL ? 1 : 0;
-    if (aOk !== bOk) { return bOk - aOk; }
-    return b.points - a.points;
+    if (strict) {
+      var aOk = a.main_approved === MAIN_TOTAL ? 1 : 0;
+      var bOk = b.main_approved === MAIN_TOTAL ? 1 : 0;
+      if (aOk !== bOk) { return bOk - aOk; }
+    }
+    if (b.approved_points !== a.approved_points) { return b.approved_points - a.approved_points; }
+    return b.pending_points - a.pending_points;
   });
 
   return rows;
@@ -1557,25 +1998,88 @@ function renderBoard(intoId) {
   if (!box) { return; }
   box.innerHTML = "";
 
-  boardRows().forEach(function (row, i) {
-    var line = el("div", "row" + (row.me ? " me" : "") + (row.done === MAIN_TOTAL ? "" : " locked"));
+  var rows = boardRows();
+
+  if (!rows.length) {
+    box.appendChild(el("div", "empty", "Inga lag registrerade än."));
+    return;
+  }
+
+  rows.forEach(function (row, i) {
+    var qualified = row.main_approved === MAIN_TOTAL;
+    var line = el("div", "row" + (me && row.id === me.id ? " me" : "") + (qualified ? "" : " locked"));
+
     line.appendChild(el("div", "rank", String(i + 1)));
 
     var who = el("div", "who");
     who.appendChild(el("span", "", row.name));
-    if (row.done !== MAIN_TOTAL) {
-      who.appendChild(el("span", "badge-locked", "Ej kvalificerad - " + row.done + "/" + MAIN_TOTAL + " steg"));
+
+    if (phase === "build") {
+      var submitted = row.main_approved + row.main_pending;
+      who.appendChild(el("span", "tag", submitted + "/" + MAIN_TOTAL + " steg inlämnade"));
+    } else if (!qualified) {
+      who.appendChild(el("span", "badge-locked", "Ej kvalificerad - " + row.main_approved + "/" + MAIN_TOTAL + " godkända"));
     }
     line.appendChild(who);
 
-    line.appendChild(el("div", "score", row.points + " p"));
+    var ap = el("div", "score-approved");
+    ap.appendChild(el("span", "", String(row.approved_points)));
+    ap.appendChild(el("span", "unit", " p"));
+    line.appendChild(ap);
+
+    var pe = el("div", "score-pending");
+    pe.appendChild(el("span", "", row.pending_points ? "+" + row.pending_points : "-"));
+    if (row.pending_points) { pe.appendChild(el("span", "unit", " p väntar")); }
+    line.appendChild(pe);
+
     box.appendChild(line);
+  });
+}
+
+/* ---------- admin ---------- */
+
+function renderPairs() {
+  var box = document.getElementById("pair-list");
+  box.innerHTML = "";
+
+  if (!pairs.length) {
+    box.appendChild(el("div", "pair", "Inga granskningspar utdelade än."));
+    return;
+  }
+
+  pairs.forEach(function (p) {
+    var line = el("div", "pair");
+    var a = el("b", "", p.reviewer ? p.reviewer.name : "?");
+    line.appendChild(a);
+    line.appendChild(el("span", "", " granskar "));
+    line.appendChild(el("b", "", p.target ? p.target.name : "?"));
+    box.appendChild(line);
+  });
+}
+
+function wireAdmin() {
+  document.getElementById("do-assign").addEventListener("click", async function () {
+    var pin = document.getElementById("admin-pin-1").value;
+    var res = await sb.rpc("assign_reviews", { pin: pin });
+    if (res.error) { flash("assign-flash", res.error.message, false); return; }
+    flash("assign-flash", res.data + " lag har fått ett lag att granska.", true);
+    await refresh();
+  });
+
+  document.querySelectorAll("[data-phase]").forEach(function (b) {
+    b.addEventListener("click", async function () {
+      var pin = document.getElementById("admin-pin-2").value;
+      var res = await sb.rpc("set_phase", { pin: pin, new_phase: b.dataset.phase });
+      if (res.error) { flash("phase-flash", res.error.message, false); return; }
+      flash("phase-flash", "Fasen är nu: " + res.data, true);
+      await refresh();
+    });
   });
 }
 
 /* ---------- flikar ---------- */
 
-var PANELS = ["start", "huvudspar", "sidequests", "ratta", "topplista"];
+var PANELS = ["start", "huvudspar", "sidequests", "granska", "topplista", "admin"];
 
 function showPanel(name) {
   PANELS.forEach(function (p) {
@@ -1586,77 +2090,78 @@ function showPanel(name) {
   });
 }
 
-document.querySelectorAll("nav.tabs button").forEach(function (b) {
-  b.addEventListener("click", function () {
-    showPanel(b.dataset.go);
-    if (location.hash.slice(1) !== b.dataset.go) {
-      history.replaceState(null, "", "#" + b.dataset.go);
-    }
+function wireTabs() {
+  document.querySelectorAll("nav.tabs button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      showPanel(b.dataset.go);
+      if (location.hash.slice(1) !== b.dataset.go) {
+        history.replaceState(null, "", "#" + b.dataset.go);
+      }
+    });
   });
-});
 
-window.addEventListener("hashchange", function () {
-  var name = location.hash.slice(1);
-  if (PANELS.indexOf(name) !== -1) { showPanel(name); }
-});
+  window.addEventListener("hashchange", function () {
+    var name = location.hash.slice(1);
+    if (PANELS.indexOf(name) !== -1) { showPanel(name); }
+  });
 
-/* ---------- lagnamn och nollställning ---------- */
+  document.getElementById("reset").addEventListener("click", function () {
+    if (!me) { return; }
+    if (!confirm("Koppla loss den här webbläsaren från " + me.name + "? Lagets poäng ligger kvar på servern.")) { return; }
+    leaveTeam();
+  });
 
-var teamInput = document.getElementById("teamname");
+  document.getElementById("openwall").addEventListener("click", function () {
+    window.open(location.pathname + "?wall=1", "_blank");
+  });
+}
 
-teamInput.addEventListener("change", function () {
-  state.team = teamInput.value.trim();
-  save();
-  renderAll();
-});
+/* ---------- rendera ---------- */
 
-document.getElementById("reset").addEventListener("click", function () {
-  if (!confirm("Nollställ allt som är avbockat och inlämnat?")) { return; }
-  state = fresh();
-  try { localStorage.removeItem(KEY); } catch (e) {}
-  teamInput.value = "";
-  renderAll();
-});
+function renderAll() {
+  renderTeambox();
+  renderGate();
+  renderPath();
+  renderProgress();
+  renderFilters();
+  renderQuests();
+  renderReview();
+  renderBoard("board");
+  renderBoard("wallboard");
+  renderPairs();
 
-/* ---------- väggläge ---------- */
+  var note = document.getElementById("footnote");
+  if (note) {
+    note.textContent = "ChasHack for rookies - uppgiftssidan. Fas: " +
+      (phase === "build" ? "bygga" : phase === "review" ? "granskning" : "klart") + ".";
+  }
+}
 
 function isWall() {
   return new URLSearchParams(location.search).get("wall") === "1";
 }
 
-document.getElementById("openwall").addEventListener("click", function () {
-  window.open(location.pathname + "?wall=1", "_blank");
-});
+async function boot() {
+  me = loadTeamFromBrowser();
 
-/* ---------- rendera ---------- */
+  if (isWall()) {
+    document.body.className = "wall-only";
+    await refresh();
+    subscribe();
+    return;
+  }
 
-function renderAll() {
-  teamInput.value = state.team || "";
-  renderPath();
-  renderProgress();
-  renderFilters();
-  renderQuests();
-  renderSubmission();
-  renderOwnQueue();
-  renderQueue();
-  renderBoard("board");
-  renderBoard("wallboard");
-}
+  wireTabs();
+  wireAdmin();
 
-if (isWall()) {
-  document.body.className = "wall-only";
-  renderBoard("wallboard");
-  window.addEventListener("storage", function (e) {
-    if (e.key === KEY) {
-      state = load() || fresh();
-      renderBoard("wallboard");
-    }
-  });
-} else {
-  renderAll();
+  await refresh();
+  subscribe();
+
   var start = location.hash.slice(1);
   showPanel(PANELS.indexOf(start) !== -1 ? start : "start");
 }
+
+boot();
 </script>
 </body>
 </html>
