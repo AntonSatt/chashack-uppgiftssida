@@ -938,6 +938,17 @@ var LEVELS = {
   "Riktigt svår": "lvl-rikigt"
 };
 
+/* VIKTIGT för den som lägger till uppgifter nedan:
+   Skriv aldrig en avslutande HTML-tagg rakt av inuti en hint-sträng. Skriv
+   <\/body>, <\/head>, <\/html> och <\/script> med bakstreck.
+
+   Bakstrecket försvinner när JavaScript läser strängen, så deltagarna ser
+   rätt kod - men verktyg som letar i filens råa text hittar inte taggen.
+   VS Code Live Server injicerar nämligen sin reload-kod vid den FÖRSTA
+   </ b o d y> den hittar. Ligger den inuti en sträng här hamnar injektionen
+   mitt i JavaScripten: allt slutar fungera och resten av koden ramlar ut
+   som synlig text längst ner på sidan. */
+
 /* Huvudspåret: tomma filer -> publicerad lagsida. Obligatoriskt, i ordning. */
 var MAIN = [
   { id: "m01", points: 10, level: "Lätt",
@@ -949,7 +960,7 @@ var MAIN = [
   { id: "m02", points: 10, level: "Lätt",
     title: "Sidans skelett",
     desc: "Fyll den tomma index.html med grundstommen som varje webbsida behöver. Titeln i fliken ska vara lagets namn.",
-    hint: "<!doctype html>\n<html lang=\"sv\">\n  <head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n    <title>LAGNAMNET</title>\n  </head>\n  <body>\n  </body>\n</html>",
+    hint: "<!doctype html>\n<html lang=\"sv\">\n  <head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n    <title>LAGNAMNET</title>\n  <\/head>\n  <body>\n  <\/body>\n<\/html>",
     proof: "index.html i repot, och lagnamnet syns i webbläsarens flik när sidan öppnas." },
 
   { id: "m03", points: 10, level: "Lätt",
