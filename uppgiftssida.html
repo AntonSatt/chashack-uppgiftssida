@@ -803,11 +803,45 @@
     border-radius: var(--radius);
     padding: 26px 28px;
     max-width: 34rem;
-    margin: 0 auto;
+    margin: 0 auto 26px;
     text-align: center;
   }
 
   .gate p { color: var(--muted); }
+
+  /* Inlämningskortet: bredare och vänsterställt, två fält under varandra */
+  .gate.links {
+    max-width: 46rem;
+    text-align: left;
+  }
+
+  .gate.links .gate-row { flex-wrap: nowrap; }
+  .gate.links .gate-row input { flex: 1 1 auto; font-weight: 400; }
+
+  .gate.links label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    margin-top: 14px;
+  }
+
+  .links-warn {
+    margin-top: 14px;
+    background: rgba(242, 165, 91, 0.12);
+    border: 1px solid rgba(242, 165, 91, 0.35);
+    color: var(--orange);
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 0.88rem;
+    font-weight: 700;
+  }
+
+  @media (max-width: 620px) {
+    .gate.links .gate-row { flex-wrap: wrap; }
+  }
 
   .gate-row {
     display: flex;
@@ -1629,11 +1663,93 @@ function renderTeambox() {
   setConn(online);
 }
 
-function renderGate() {
-  var wrap = document.getElementById("gate-wrap");
-  wrap.innerHTML = "";
-  if (me) { return; }
+/* Länkarna laget lämnar in. Utan repo-länk har granskarna ingenting att öppna,
+   så kortet ligger först på startsidan och tjatar tills den är ifylld. */
+async function saveLinks(repo, live) {
+  if (!me) { return; }
+  var res = await sb.from("teams")
+    .update({ repo_url: repo || null, live_url: live || null })
+    .eq("id", me.id);
 
+  if (res.error) {
+    flash("links-flash", "Kunde inte spara: " + res.error.message, false);
+    return;
+  }
+  flash("links-flash", "Sparat.", true);
+  await refresh();
+}
+
+function linksWarnNode() {
+  return el("div", "links-warn", "Ni har inte lämnat in någon repo-länk än. Utan den kan granskarlaget inte se vad ni byggt.");
+}
+
+function renderLinks(wrap) {
+  var row = myRow();
+  var card = el("div", "gate links");
+
+  card.appendChild(el("h3", "", "Er inlämning"));
+  card.appendChild(el("p", "", "Länkarna som granskarlaget öppnar när de ska bedöma era uppgifter. Fyll i repo-länken så snart ni forkat, och lägg till den publicerade sidan när steg 10 är klart."));
+
+  var repoLabel = el("label", "", "Länk till lagets repo");
+  repoLabel.setAttribute("for", "repo-url");
+  card.appendChild(repoLabel);
+
+  var repoRow = el("div", "gate-row");
+  var repo = document.createElement("input");
+  repo.id = "repo-url";
+  repo.type = "url";
+  repo.placeholder = "https://github.com/ert-lag/chashack-starter";
+  repo.value = row && row.repo_url ? row.repo_url : "";
+  repoRow.appendChild(repo);
+  card.appendChild(repoRow);
+
+  var liveLabel = el("label", "", "Länk till er publicerade sida (när den finns)");
+  liveLabel.setAttribute("for", "live-url");
+  card.appendChild(liveLabel);
+
+  var liveRow = el("div", "gate-row");
+  var live = document.createElement("input");
+  live.id = "live-url";
+  live.type = "url";
+  live.placeholder = "https://ert-lag.github.io/chashack-starter/";
+  live.value = row && row.live_url ? row.live_url : "";
+  liveRow.appendChild(live);
+
+  var save = el("button", "", "Spara");
+  save.addEventListener("click", function () { saveLinks(repo.value.trim(), live.value.trim()); });
+  liveRow.appendChild(save);
+  card.appendChild(liveRow);
+
+  var f = el("div", "flash");
+  f.id = "links-flash";
+  card.appendChild(f);
+
+  if (!row || !row.repo_url) { card.appendChild(linksWarnNode()); }
+
+  wrap.appendChild(card);
+}
+
+/* Uppdaterar kortet utan att bygga om det, så att en live-uppdatering mitt i
+   inskrivningen inte raderar det laget håller på att skriva. */
+function syncLinks(wrap) {
+  var row = myRow();
+  var repo = wrap.querySelector("#repo-url");
+  var live = wrap.querySelector("#live-url");
+
+  if (repo && document.activeElement !== repo) {
+    repo.value = row && row.repo_url ? row.repo_url : "";
+  }
+  if (live && document.activeElement !== live) {
+    live.value = row && row.live_url ? row.live_url : "";
+  }
+
+  var warn = wrap.querySelector(".links-warn");
+  var behovs = !row || !row.repo_url;
+  if (behovs && !warn) { wrap.querySelector(".gate.links").appendChild(linksWarnNode()); }
+  if (!behovs && warn) { warn.remove(); }
+}
+
+function renderJoin(wrap) {
   var gate = el("div", "gate");
   gate.appendChild(el("h3", "", "Vad heter ert lag?"));
   gate.appendChild(el("p", "", "Skriv lagnamnet så kopplas den här datorn till laget. Finns namnet redan går ni med i det laget - så kan flera i laget jobba från olika datorer."));
@@ -1659,6 +1775,20 @@ function renderGate() {
   gate.appendChild(f);
 
   wrap.appendChild(gate);
+}
+
+function renderGate() {
+  var wrap = document.getElementById("gate-wrap");
+  var mode = me ? "links" : "join";
+
+  if (wrap.dataset.mode !== mode) {
+    wrap.innerHTML = "";
+    wrap.dataset.mode = mode;
+    if (me) { renderLinks(wrap); } else { renderJoin(wrap); }
+    return;
+  }
+
+  if (me) { syncLinks(wrap); }
 }
 
 /* ---------- bocka av ---------- */
