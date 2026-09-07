@@ -453,17 +453,6 @@
     white-space: pre-line;
   }
 
-  .hint.facit { border-top: 0; padding-top: 4px; }
-  .hint.facit summary { color: var(--orange); }
-
-  .facit-varning {
-    margin: 8px 0 0;
-    font-size: 0.82rem;
-    color: var(--orange);
-    background: rgba(242, 165, 91, 0.1);
-    border-radius: 10px;
-    padding: 8px 12px;
-  }
 
   .proof {
     margin-top: 12px;
@@ -973,91 +962,77 @@ var MAIN = [
   { id: "m01", points: 10, level: "Lätt",
     title: "Ta ert repo",
     desc: "Forka start-repot till laget, gör kopian publik och bjud in alla i laget som collaborators. Klona sen ner det och öppna mappen i VS Code.",
-    hint: "Fork-knappen ligger uppe till höger på GitHub. När kopian är er egen: tryck på den gröna Code-knappen och kopiera URL:en - det är den ni klonar med.\n\nCollaborators bjuder ni in under Settings i ert eget repo.",
-    facit: "git clone https://github.com/ERT-LAG/chashack-starter.git\ncd chashack-starter\ncode .",
+    hint: "Fork-knappen ligger uppe till höger på GitHub. När kopian är er egen: tryck på den gröna Code-knappen och kopiera URL:en.\n\nI terminalen heter kommandot git clone, följt av URL:en ni kopierade. Sen går ni in i mappen med cd och öppnar den i VS Code.\n\nCollaborators bjuder ni in under Settings i ert eget repo.",
     proof: "Repo-URL som öppnas i ett privat fönster utan inloggning, med alla i laget under Collaborators." },
 
   { id: "m02", points: 10, level: "Lätt",
     title: "Sidans skelett",
     desc: "Fyll den tomma index.html med grundstommen som varje webbsida behöver. Titeln i fliken ska vara lagets namn.",
     hint: "Varje HTML-sida har samma grundstomme: en doctype högst upp, ett html-element runt allt, ett head med teckenkodning och titel, och ett body där innehållet hamnar.\n\nGenväg: skriv ett utropstecken i den tomma filen och tryck Tab. VS Code skriver hela stommen åt er. Sen byter ni bara ut titeln.",
-    facit: "<!doctype html>\n<html lang=\"sv\">\n  <head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n    <title>LAGNAMNET<\/title>\n  <\/head>\n  <body>\n  <\/body>\n<\/html>",
     proof: "index.html i repot, och lagnamnet syns i webbläsarens flik när sidan öppnas." },
 
   { id: "m03", points: 10, level: "Lätt",
     title: "Rubrik och pitch",
     desc: "Sätt en rubrik med lagets namn och ett stycke under som beskriver laget i två till tre meningar. Vilka är ni och vad gör ni här?",
     hint: "Sidans viktigaste rubrik heter h1. Ett stycke text heter p.\n\nBåda är par: en öppnande tagg, texten, och en stängande tagg med snedstreck. Allt innehåll ska ligga inne i body.",
-    facit: "<h1>Lagnamnet</h1>\n<p>Vi är fem stycken som just börjat på Chas Academy.\nIdag bygger vi vår första hemsida ihop.</p>",
     proof: "Rubriken och texten syns på sidan när man öppnar index.html." },
 
   { id: "m04", points: 10, level: "Lätt",
     title: "Laget i en lista",
     desc: "Lista alla i laget med en punktlista. En rad per person. Alla ska vara med.",
     hint: "En punktlista byggs av två taggar som jobbar ihop: en som omsluter hela listan, och en som omsluter varje enskild punkt.\n\nSök på \"html lista\" om ni vill se hur de nästlas i varandra.",
-    facit: "<h2>Vilka vi är</h2>\n<ul>\n  <li>Namn Namnsson</li>\n  <li>Annan Person</li>\n</ul>",
     proof: "Alla lagmedlemmars namn syns i en lista på sidan." },
 
   { id: "m05", points: 10, level: "Lätt",
     title: "Koppla stilmallen",
     desc: "Länka in style.css i head och ge sidan egna färger och ett eget typsnitt. Nu slutar den se ut som ett dokument från 1995.",
     hint: "CSS kopplas in med en link-tagg inne i head. Den behöver veta två saker: att det är en stilmall, och vad filen heter.\n\nI style.css skriver ni sen en regel för body. Testa egenskaperna background, color och font-family.",
-    facit: "I index.html, inne i head:\n<link rel=\"stylesheet\" href=\"style.css\">\n\nI style.css:\nbody {\n  background: #13131a;\n  color: #f5f5f5;\n  font-family: system-ui, sans-serif;\n}",
     proof: "style.css är länkad och sidan har egna färger. Kodraderna syns i repot." },
 
   { id: "m06", points: 15, level: "Medel",
     title: "Layout som håller ihop",
     desc: "Innehållet ska inte ligga kant till kant. Samla det i en kolumn med luft runt, centrerad på sidan.",
     hint: "Tre CSS-egenskaper räcker: en som sätter en gräns för hur brett innehållet får bli, en som ger luft utanför, och en som ger luft innanför.\n\nSlå upp max-width, margin och padding. Tricket som centrerar kolumnen är att sätta marginalen till auto på sidorna.",
-    facit: "body {\n  max-width: 40rem;\n  margin: 0 auto;\n  padding: 3rem 1.5rem;\n}",
     proof: "Sidan har en centrerad kolumn med marginaler, inte text som går ut i kanterna." },
 
   { id: "m07", points: 15, level: "Medel",
     title: "Lagets logga",
     desc: "Gör en logga för laget, lägg bildfilen i repot och visa den på sidan. Den ska ha en alt-text som beskriver vad bilden föreställer.",
     hint: "Bilder läggs in med img-taggen. Den behöver två attribut: ett som säger var filen ligger, och ett som beskriver vad bilden föreställer för den som inte kan se den.\n\nBildfilen måste ligga i samma mapp som index.html, annars hittar webbläsaren den inte. Skriv vad som syns i alt-texten, inte ordet logga.",
-    facit: "<img src=\"logga.png\" alt=\"Lagets logga: en blå räv i en cirkel\" width=\"200\">",
     proof: "Bildfilen ligger i repot, loggan syns på sidan och img-taggen har en beskrivande alt-text." },
 
   { id: "m08", points: 15, level: "Medel",
     title: "Liv i sidan",
     desc: "Koppla in script.js och lägg till en knapp som gör något när man klickar på den. Vad som helst - en hälsning, en färg som byts, en text som dyker upp.",
     hint: "Tre delar ska på plats:\n\n1. En knapp i HTML. Ge den ett id så att JavaScript kan hitta den.\n2. En script-tagg sist i body som laddar script.js.\n3. I script.js: hämta knappen med document.querySelector och lyssna efter klick med addEventListener.\n\nSätt script-taggen SIST i body. Ligger den högst upp körs koden innan knappen finns, och då hittas den inte.",
-    facit: "Sist i body i index.html:\n<button id=\"knapp\">Tryck här</button>\n<script src=\"script.js\"><\/script>\n\nI script.js:\nvar knapp = document.querySelector(\"#knapp\");\nknapp.addEventListener(\"click\", function () {\n  alert(\"Hej från laget!\");\n});",
     proof: "script.js är inkopplad och knappen gör något synligt vid klick. Skärmdump eller GIF som visar det." },
 
   { id: "m09", points: 10, level: "Lätt",
     title: "Sidfot",
     desc: "Avsluta sidan med en footer som visar lagets namn och årtal. Ge den en tunn linje ovanför så den känns som ett avslut.",
     hint: "Det finns en egen HTML-tagg som heter just footer. Den fungerar som vilken behållare som helst - lägg texten inuti.\n\nLinjen ovanför gör ni i CSS med border-top. Ge den lite luft med margin-top och padding-top.",
-    facit: "<footer>\n  <p>Lagnamnet - ChasHack 2026</p>\n</footer>\n\nfooter {\n  border-top: 1px solid #333;\n  margin-top: 3rem;\n  padding-top: 1rem;\n}",
     proof: "Footern syns längst ner på sidan med lagnamn och årtal." },
 
   { id: "m10", points: 20, level: "Medel",
     title: "Publicera på nätet",
     desc: "Lägg upp sidan med GitHub Pages så att vem som helst kan öppna den. Det här är steget som gör den till en riktig webbplats.",
     hint: "Allt sker på github.com, inget i terminalen. Leta upp Settings i ert repo, och sen Pages i menyn till vänster.\n\nDär väljer ni att publicera från en branch. Vänta en minut efter att ni sparat - URL:en dyker upp högst upp på samma sida.",
-    facit: "Settings -> Pages\nSource: Deploy from a branch\nBranch: main, mapp: / (root)\nSpara och vänta en minut.\n\nURL:en blir ungefär:\nhttps://ANVANDARNAMN.github.io/chashack-starter/",
     proof: "En publik URL som öppnas i ett privat fönster utan inloggning och visar lagets sida." },
 
   { id: "m11", points: 10, level: "Lätt",
     title: "Alla har committat",
     desc: "Varje person i laget ska ha gjort minst en egen commit och push. Historiken ska visa flera olika namn.",
     hint: "Tre kommandon i tur och ordning: ett som väljer vad som ska med, ett som sparar det i historiken med ett meddelande, och ett som skickar upp det till GitHub.\n\nSlå upp git add, git commit och git push. Resultatet ser ni under fliken Commits i repot.",
-    facit: "git add .\ngit commit -m \"beskriv vad du gjorde\"\ngit push",
     proof: "Commit-historiken i repot visar commits från alla i laget." },
 
   { id: "m12", points: 10, level: "Lätt",
     title: "README som förklarar",
     desc: "Skriv en README som berättar vilka ni är, vad sidan är, och länkar till den publicerade versionen. Det är första någon läser om ert projekt.",
     hint: "README.md skrivs i Markdown, inte HTML. Tre tecken räcker långt:\n\nEn fyrkant framför en rad gör den till rubrik. Ett bindestreck framför en rad gör den till en punkt i en lista. En länk skrivs som text inom hakparenteser följt av adressen inom vanliga parenteser.",
-    facit: "# Lagnamnet\n\nVår lagsida byggd på ChasHack 2026.\n\n[Se sidan live](https://anvandarnamn.github.io/chashack-starter/)\n\n## Laget\n- Namn Namnsson\n- Annan Person",
     proof: "README.md i repot med lagnamn, medlemmar och en fungerande länk till den publicerade sidan." }
 ];
 
-/* Side quests: frivilliga, bygger vidare på lagsidan.
-   Här finns med flit inget facit - de ska förtjänas. Ledtråden pekar ut
-   rätt begrepp och funktion, resten skriver laget själva. */
+/* Side quests: frivilliga, bygger vidare på lagsidan. */
 var QUESTS = [
   { id: "q01", cat: "styling", points: 15, level: "Medel",
     title: "Egen favicon",
@@ -1230,28 +1205,15 @@ function levelBadge(level) {
   return el("span", "level " + LEVELS[level], level);
 }
 
-/* Ledtråden pekar ut rätt begrepp men skriver inte koden åt laget.
-   Facit ligger bakom ett eget klick och finns bara på huvudspåret - fastnar
-   ett lag där kan de inte gå vidare alls. Side quests har medvetet inget. */
+/* Ledtråden pekar ut rätt begrepp och vad man ska slå upp, men skriver aldrig
+   koden åt laget. Det finns med flit inget facit någonstans: ligger svaret en
+   klick bort frågar lagen varken varandra eller handledarna. Kör de fast finns
+   det handledare på plats. */
 function hintBlock(task) {
-  var wrap = document.createElement("div");
-
   var box = el("details", "hint");
   box.appendChild(el("summary", "", "Ledtråd"));
   box.appendChild(el("p", "hint-text", task.hint));
-  wrap.appendChild(box);
-
-  if (task.facit) {
-    var facit = el("details", "hint facit");
-    facit.appendChild(el("summary", "", "Fastnat helt? Visa facit"));
-    facit.appendChild(el("p", "facit-varning", "Försök själva först - det är där ni lär er. Facit är till för att ni inte ska stå stilla, inte för att skrivas av."));
-    var pre = el("pre");
-    pre.appendChild(el("code", "", task.facit));
-    facit.appendChild(pre);
-    wrap.appendChild(facit);
-  }
-
-  return wrap;
+  return box;
 }
 
 function proofBlock(task) {

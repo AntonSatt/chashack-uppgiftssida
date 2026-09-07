@@ -27,10 +27,11 @@ vara godkända för att laget ska kunna vinna. Uppgiftssidan visar ett lag som i
 Uppgifterna bor i `uppgiftssida.html` (arrayerna `MAIN` och `QUESTS`). Ändras en
 rad här ska motsvarande post i den filen ändras också.
 
-**Ledtrådar och facit:** varje uppgift har en ledtråd som pekar ut rätt begrepp
-och funktion utan att skriva koden. Huvudspåret har dessutom ett facit bakom ett
-eget klick, så att inget lag fastnar och blir stående på den obligatoriska
-kedjan. Side quests har medvetet inget facit - de ska förtjänas.
+**Ledtrådar:** varje uppgift har en ledtråd som pekar ut rätt begrepp, tagg eller
+funktion och vad man ska slå upp - men aldrig koden. Det finns med flit **inget
+facit** någonstans. Ligger svaret en klick bort frågar lagen varken varandra
+eller oss, och då tappar vi både samarbetet och lärandet. Kör ett lag fast är
+det handledare på plats som gäller.
 
 ## Huvudspåret (12 steg, 145p, obligatoriskt)
 
