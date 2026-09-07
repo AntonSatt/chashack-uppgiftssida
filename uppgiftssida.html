@@ -446,6 +446,25 @@
   .hint summary::before { content: "\25B8 "; display: inline-block; transition: transform 0.15s ease; }
   .hint[open] summary::before { content: "\25BE "; }
 
+  .hint-text {
+    margin: 8px 0 0;
+    color: var(--muted);
+    font-size: 0.92rem;
+    white-space: pre-line;
+  }
+
+  .hint.facit { border-top: 0; padding-top: 4px; }
+  .hint.facit summary { color: var(--orange); }
+
+  .facit-varning {
+    margin: 8px 0 0;
+    font-size: 0.82rem;
+    color: var(--orange);
+    background: rgba(242, 165, 91, 0.1);
+    border-radius: 10px;
+    padding: 8px 12px;
+  }
+
   .proof {
     margin-top: 12px;
     background: var(--panel-soft);
@@ -954,172 +973,186 @@ var MAIN = [
   { id: "m01", points: 10, level: "Lätt",
     title: "Ta ert repo",
     desc: "Forka start-repot till laget, gör kopian publik och bjud in alla i laget som collaborators. Klona sen ner det och öppna mappen i VS Code.",
-    hint: "Fork-knappen ligger uppe till höger på GitHub.\nSen, i terminalen:\n\ngit clone https://github.com/ERT-LAG/chashack-starter.git\ncd chashack-starter\ncode .",
+    hint: "Fork-knappen ligger uppe till höger på GitHub. När kopian är er egen: tryck på den gröna Code-knappen och kopiera URL:en - det är den ni klonar med.\n\nCollaborators bjuder ni in under Settings i ert eget repo.",
+    facit: "git clone https://github.com/ERT-LAG/chashack-starter.git\ncd chashack-starter\ncode .",
     proof: "Repo-URL som öppnas i ett privat fönster utan inloggning, med alla i laget under Collaborators." },
 
   { id: "m02", points: 10, level: "Lätt",
     title: "Sidans skelett",
     desc: "Fyll den tomma index.html med grundstommen som varje webbsida behöver. Titeln i fliken ska vara lagets namn.",
-    hint: "<!doctype html>\n<html lang=\"sv\">\n  <head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n    <title>LAGNAMNET</title>\n  <\/head>\n  <body>\n  <\/body>\n<\/html>",
+    hint: "Varje HTML-sida har samma grundstomme: en doctype högst upp, ett html-element runt allt, ett head med teckenkodning och titel, och ett body där innehållet hamnar.\n\nGenväg: skriv ett utropstecken i den tomma filen och tryck Tab. VS Code skriver hela stommen åt er. Sen byter ni bara ut titeln.",
+    facit: "<!doctype html>\n<html lang=\"sv\">\n  <head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n    <title>LAGNAMNET<\/title>\n  <\/head>\n  <body>\n  <\/body>\n<\/html>",
     proof: "index.html i repot, och lagnamnet syns i webbläsarens flik när sidan öppnas." },
 
   { id: "m03", points: 10, level: "Lätt",
     title: "Rubrik och pitch",
     desc: "Sätt en rubrik med lagets namn och ett stycke under som beskriver laget i två till tre meningar. Vilka är ni och vad gör ni här?",
-    hint: "<h1>Lagnamnet</h1>\n<p>Vi är fem stycken som just börjat på Chas Academy.\nIdag bygger vi vår första hemsida ihop.</p>",
+    hint: "Sidans viktigaste rubrik heter h1. Ett stycke text heter p.\n\nBåda är par: en öppnande tagg, texten, och en stängande tagg med snedstreck. Allt innehåll ska ligga inne i body.",
+    facit: "<h1>Lagnamnet</h1>\n<p>Vi är fem stycken som just börjat på Chas Academy.\nIdag bygger vi vår första hemsida ihop.</p>",
     proof: "Rubriken och texten syns på sidan när man öppnar index.html." },
 
   { id: "m04", points: 10, level: "Lätt",
     title: "Laget i en lista",
     desc: "Lista alla i laget med en punktlista. En rad per person. Alla ska vara med.",
-    hint: "<h2>Vilka vi är</h2>\n<ul>\n  <li>Namn Namnsson</li>\n  <li>Annan Person</li>\n</ul>",
+    hint: "En punktlista byggs av två taggar som jobbar ihop: en som omsluter hela listan, och en som omsluter varje enskild punkt.\n\nSök på \"html lista\" om ni vill se hur de nästlas i varandra.",
+    facit: "<h2>Vilka vi är</h2>\n<ul>\n  <li>Namn Namnsson</li>\n  <li>Annan Person</li>\n</ul>",
     proof: "Alla lagmedlemmars namn syns i en lista på sidan." },
 
   { id: "m05", points: 10, level: "Lätt",
     title: "Koppla stilmallen",
     desc: "Länka in style.css i head och ge sidan egna färger och ett eget typsnitt. Nu slutar den se ut som ett dokument från 1995.",
-    hint: "I index.html, inne i <head>:\n<link rel=\"stylesheet\" href=\"style.css\">\n\nI style.css:\nbody {\n  background: #13131a;\n  color: #f5f5f5;\n  font-family: system-ui, sans-serif;\n}",
+    hint: "CSS kopplas in med en link-tagg inne i head. Den behöver veta två saker: att det är en stilmall, och vad filen heter.\n\nI style.css skriver ni sen en regel för body. Testa egenskaperna background, color och font-family.",
+    facit: "I index.html, inne i head:\n<link rel=\"stylesheet\" href=\"style.css\">\n\nI style.css:\nbody {\n  background: #13131a;\n  color: #f5f5f5;\n  font-family: system-ui, sans-serif;\n}",
     proof: "style.css är länkad och sidan har egna färger. Kodraderna syns i repot." },
 
   { id: "m06", points: 15, level: "Medel",
     title: "Layout som håller ihop",
     desc: "Innehållet ska inte ligga kant till kant. Samla det i en kolumn med luft runt, centrerad på sidan.",
-    hint: "body {\n  max-width: 40rem;\n  margin: 0 auto;\n  padding: 3rem 1.5rem;\n}\n\nmax-width sätter en gräns för bredden.\nmargin: 0 auto centrerar den.",
+    hint: "Tre CSS-egenskaper räcker: en som sätter en gräns för hur brett innehållet får bli, en som ger luft utanför, och en som ger luft innanför.\n\nSlå upp max-width, margin och padding. Tricket som centrerar kolumnen är att sätta marginalen till auto på sidorna.",
+    facit: "body {\n  max-width: 40rem;\n  margin: 0 auto;\n  padding: 3rem 1.5rem;\n}",
     proof: "Sidan har en centrerad kolumn med marginaler, inte text som går ut i kanterna." },
 
   { id: "m07", points: 15, level: "Medel",
     title: "Lagets logga",
     desc: "Gör en logga för laget, lägg bildfilen i repot och visa den på sidan. Den ska ha en alt-text som beskriver vad bilden föreställer.",
-    hint: "<img src=\"logga.png\" alt=\"Lagets logga: en blå räv i en cirkel\" width=\"200\">\n\nAlt-texten läses upp för den som använder skärmläsare.\nSkriv vad som syns, inte ordet logga.",
+    hint: "Bilder läggs in med img-taggen. Den behöver två attribut: ett som säger var filen ligger, och ett som beskriver vad bilden föreställer för den som inte kan se den.\n\nBildfilen måste ligga i samma mapp som index.html, annars hittar webbläsaren den inte. Skriv vad som syns i alt-texten, inte ordet logga.",
+    facit: "<img src=\"logga.png\" alt=\"Lagets logga: en blå räv i en cirkel\" width=\"200\">",
     proof: "Bildfilen ligger i repot, loggan syns på sidan och img-taggen har en beskrivande alt-text." },
 
   { id: "m08", points: 15, level: "Medel",
     title: "Liv i sidan",
     desc: "Koppla in script.js och lägg till en knapp som gör något när man klickar på den. Vad som helst - en hälsning, en färg som byts, en text som dyker upp.",
-    hint: "Sist i body i index.html:\n<button id=\"knapp\">Tryck här</button>\n<script src=\"script.js\"><\/script>\n\nI script.js:\nvar knapp = document.querySelector(\"#knapp\");\nknapp.addEventListener(\"click\", function () {\n  alert(\"Hej från laget!\");\n});",
+    hint: "Tre delar ska på plats:\n\n1. En knapp i HTML. Ge den ett id så att JavaScript kan hitta den.\n2. En script-tagg sist i body som laddar script.js.\n3. I script.js: hämta knappen med document.querySelector och lyssna efter klick med addEventListener.\n\nSätt script-taggen SIST i body. Ligger den högst upp körs koden innan knappen finns, och då hittas den inte.",
+    facit: "Sist i body i index.html:\n<button id=\"knapp\">Tryck här</button>\n<script src=\"script.js\"><\/script>\n\nI script.js:\nvar knapp = document.querySelector(\"#knapp\");\nknapp.addEventListener(\"click\", function () {\n  alert(\"Hej från laget!\");\n});",
     proof: "script.js är inkopplad och knappen gör något synligt vid klick. Skärmdump eller GIF som visar det." },
 
   { id: "m09", points: 10, level: "Lätt",
     title: "Sidfot",
     desc: "Avsluta sidan med en footer som visar lagets namn och årtal. Ge den en tunn linje ovanför så den känns som ett avslut.",
-    hint: "<footer>\n  <p>Lagnamnet - ChasHack 2026</p>\n</footer>\n\nfooter {\n  border-top: 1px solid #333;\n  margin-top: 3rem;\n  padding-top: 1rem;\n}",
+    hint: "Det finns en egen HTML-tagg som heter just footer. Den fungerar som vilken behållare som helst - lägg texten inuti.\n\nLinjen ovanför gör ni i CSS med border-top. Ge den lite luft med margin-top och padding-top.",
+    facit: "<footer>\n  <p>Lagnamnet - ChasHack 2026</p>\n</footer>\n\nfooter {\n  border-top: 1px solid #333;\n  margin-top: 3rem;\n  padding-top: 1rem;\n}",
     proof: "Footern syns längst ner på sidan med lagnamn och årtal." },
 
   { id: "m10", points: 20, level: "Medel",
     title: "Publicera på nätet",
     desc: "Lägg upp sidan med GitHub Pages så att vem som helst kan öppna den. Det här är steget som gör den till en riktig webbplats.",
-    hint: "På GitHub: Settings -> Pages\nSource: Deploy from a branch\nBranch: main, mapp: / (root)\nSpara och vänta en minut.\n\nURL:en blir ungefär:\nhttps://ANVANDARNAMN.github.io/chashack-starter/",
+    hint: "Allt sker på github.com, inget i terminalen. Leta upp Settings i ert repo, och sen Pages i menyn till vänster.\n\nDär väljer ni att publicera från en branch. Vänta en minut efter att ni sparat - URL:en dyker upp högst upp på samma sida.",
+    facit: "Settings -> Pages\nSource: Deploy from a branch\nBranch: main, mapp: / (root)\nSpara och vänta en minut.\n\nURL:en blir ungefär:\nhttps://ANVANDARNAMN.github.io/chashack-starter/",
     proof: "En publik URL som öppnas i ett privat fönster utan inloggning och visar lagets sida." },
 
   { id: "m11", points: 10, level: "Lätt",
     title: "Alla har committat",
     desc: "Varje person i laget ska ha gjort minst en egen commit och push. Historiken ska visa flera olika namn.",
-    hint: "git add .\ngit commit -m \"beskriv vad du gjorde\"\ngit push\n\nKolla resultatet under fliken Commits i repot.",
+    hint: "Tre kommandon i tur och ordning: ett som väljer vad som ska med, ett som sparar det i historiken med ett meddelande, och ett som skickar upp det till GitHub.\n\nSlå upp git add, git commit och git push. Resultatet ser ni under fliken Commits i repot.",
+    facit: "git add .\ngit commit -m \"beskriv vad du gjorde\"\ngit push",
     proof: "Commit-historiken i repot visar commits från alla i laget." },
 
   { id: "m12", points: 10, level: "Lätt",
     title: "README som förklarar",
     desc: "Skriv en README som berättar vilka ni är, vad sidan är, och länkar till den publicerade versionen. Det är första någon läser om ert projekt.",
-    hint: "# Lagnamnet\n\nVår lagsida byggd på ChasHack 2026.\n\nLive: https://anvandarnamn.github.io/chashack-starter/\n\n## Laget\n- Namn Namnsson\n- Annan Person",
+    hint: "README.md skrivs i Markdown, inte HTML. Tre tecken räcker långt:\n\nEn fyrkant framför en rad gör den till rubrik. Ett bindestreck framför en rad gör den till en punkt i en lista. En länk skrivs som text inom hakparenteser följt av adressen inom vanliga parenteser.",
+    facit: "# Lagnamnet\n\nVår lagsida byggd på ChasHack 2026.\n\n[Se sidan live](https://anvandarnamn.github.io/chashack-starter/)\n\n## Laget\n- Namn Namnsson\n- Annan Person",
     proof: "README.md i repot med lagnamn, medlemmar och en fungerande länk till den publicerade sidan." }
 ];
 
-/* Side quests: frivilliga, bygger vidare på lagsidan. */
+/* Side quests: frivilliga, bygger vidare på lagsidan.
+   Här finns med flit inget facit - de ska förtjänas. Ledtråden pekar ut
+   rätt begrepp och funktion, resten skriver laget själva. */
 var QUESTS = [
   { id: "q01", cat: "styling", points: 15, level: "Medel",
     title: "Egen favicon",
     desc: "Den lilla bilden i webbläsarfliken. Gör en egen och koppla in den.",
-    hint: "Spara en kvadratisk bild som favicon.png i repot.\nSen i head:\n<link rel=\"icon\" href=\"favicon.png\">",
+    hint: "Samma sorts link-tagg som ni använde för stilmallen, men med ett annat rel-värde. Slå upp \"html favicon\".\n\nBilden ska vara kvadratisk, gärna 64 gånger 64 pixlar.",
     proof: "Bildfilen i repot och er ikon syns i fliken." },
 
   { id: "q02", cat: "styling", points: 15, level: "Medel",
     title: "Hover-effekter",
     desc: "Låt knappar och länkar reagera när muspekaren är över dem. Små saker som får sidan att kännas levande.",
-    hint: "button:hover {\n  background: #9a7cff;\n  transform: translateY(-2px);\n}\n\nLägg till transition för mjuk övergång:\nbutton { transition: all 0.2s ease; }",
+    hint: "Hover är en pseudoklass: ni hänger den på en vanlig selektor med kolon, och reglerna gäller bara när muspekaren är över elementet.\n\nFör att övergången ska bli mjuk istället för hackig lägger ni transition på grundregeln, inte på hover-regeln.",
     proof: "Knappar eller länkar ändrar utseende vid hover. Skärmdump eller GIF." },
 
   { id: "q03", cat: "styling", points: 20, level: "Medel",
     title: "Egen färgpalett",
     desc: "Samla sidans färger som CSS-variabler högst upp och använd dem konsekvent. Byter ni en färg ska hela sidan följa med.",
-    hint: ":root {\n  --bakgrund: #13131a;\n  --text: #f5f5f5;\n  --accent: #7c5cff;\n}\n\nbody {\n  background: var(--bakgrund);\n  color: var(--text);\n}",
+    hint: "CSS-variabler deklareras i en blocket som heter :root, och namnen måste börja med två bindestreck.\n\nDe läses sen ut med funktionen var(). Slå upp \"css custom properties\".",
     proof: "CSS-variabler definierade i :root och använda på minst tre ställen i style.css." },
 
   { id: "q04", cat: "samarbete", points: 15, level: "Medel",
     title: "Lagbild på sidan",
     desc: "Ta en riktig bild på hela laget på plats och lägg den på sidan. Alla ska ha sagt okej innan den publiceras.",
-    hint: "<img src=\"lagbild.jpg\" alt=\"Hela laget framför whiteboarden\" width=\"400\">\n\nTips: img { border-radius: 12px; } ger mjuka hörn.",
+    hint: "Samma img-tagg som ni använde till loggan.\n\nÄr bilden från en mobilkamera är den ofta flera megabyte - krymp den innan ni committar, annars blir sidan seg att ladda.",
     proof: "Bilden ligger i repot och syns på den publicerade sidan." },
 
   { id: "q05", cat: "funktion", points: 20, level: "Medel",
     title: "Klickräknare",
     desc: "En knapp som räknar hur många gånger den blivit klickad och visar siffran på sidan.",
-    hint: "<span id=\"antal\">0</span>\n<button id=\"rakna\">Klicka</button>\n\nvar antal = 0;\ndocument.querySelector(\"#rakna\").addEventListener(\"click\", function () {\n  antal = antal + 1;\n  document.querySelector(\"#antal\").textContent = antal;\n});",
+    hint: "Nyckeln är var räknaren bor. Deklarerar ni den inuti klickfunktionen nollställs den vid varje klick - den måste ligga utanför för att överleva mellan klicken.\n\nFör att skriva ut siffran på sidan använder ni textContent på elementet som ska visa den.",
     proof: "Siffran räknas upp vid klick. GIF eller skärmdump som visar det." },
 
   { id: "q06", cat: "funktion", points: 20, level: "Medel",
     title: "Slumpat lagcitat",
     desc: "En knapp som slumpar fram ett nytt citat, skämt eller motto ur en lista varje gång man trycker.",
-    hint: "var citat = [\"Det funkar på min dator\", \"Har du testat starta om?\"];\n\nknapp.addEventListener(\"click\", function () {\n  var i = Math.floor(Math.random() * citat.length);\n  ruta.textContent = citat[i];\n});",
+    hint: "Math.random() ger ett decimaltal mellan 0 och 1. Multiplicerar ni det med arrayens length får ni ett tal inom listans intervall - men med decimaler.\n\nMath.floor() rundar ner till ett helt tal, och då har ni ett giltigt index.",
     proof: "Texten byts till ett nytt slumpat citat vid klick." },
 
   { id: "q07", cat: "styling", points: 25, level: "Svår",
     title: "Animerad entré",
     desc: "Låt rubriken eller loggan glida in när sidan laddas. Diskret räcker - det ska kännas polerat, inte stökigt.",
-    hint: "@keyframes glidIn {\n  from { opacity: 0; transform: translateY(20px); }\n  to   { opacity: 1; transform: none; }\n}\n\nh1 {\n  animation: glidIn 0.6s ease both;\n}",
+    hint: "Två delar: @keyframes definierar hur animationen ser ut från början till slut, och egenskapen animation kopplar den till ett element.\n\nAtt animera opacity och transform ihop ger den mjukaste effekten. Slå upp \"css keyframes\".",
     proof: "Något animeras när sidan laddas. GIF eller skärminspelning." },
 
   { id: "q08", cat: "styling", points: 25, level: "Svår",
     title: "Funkar i mobilen",
     desc: "Sidan ska se bra ut på en telefon också. Testa genom att dra ihop webbläsarfönstret tills det är smalt.",
-    hint: "@media (max-width: 600px) {\n  body { padding: 1.5rem 1rem; }\n  h1 { font-size: 1.6rem; }\n}\n\nMedia queries låter er ge egna regler\nför små skärmar.",
+    hint: "En media query är ett block i CSS som bara gäller under vissa villkor, till exempel när skärmen är smalare än en viss bredd.\n\nReglerna inuti skriver över de vanliga. Slå upp \"css media query max-width\".",
     proof: "Skärmdump av sidan i mobilbredd där inget spricker eller ligger utanför kanten." },
 
   { id: "q09", cat: "funktion", points: 30, level: "Svår",
     title: "Mörkt och ljust läge",
     desc: "En knapp som växlar sidan mellan mörkt och ljust tema. Bygger vidare på färgpaletten.",
-    hint: "body.ljus {\n  --bakgrund: #ffffff;\n  --text: #1a1a1a;\n}\n\nknapp.addEventListener(\"click\", function () {\n  document.body.classList.toggle(\"ljus\");\n});",
+    hint: "Enklast om ni gjort färgpaletten först. Lägg det ljusa temat som en egen klass som skriver över variablerna, och sätt den klassen på body.\n\nI JavaScript finns classList.toggle() som lägger till klassen om den saknas och tar bort den om den finns - precis vad en växlingsknapp behöver.",
     proof: "Knappen växlar hela sidans färgtema fram och tillbaka. GIF som visar båda lägena." },
 
   { id: "q10", cat: "funktion", points: 30, level: "Svår",
     title: "Medlemskort ur en array",
     desc: "Sluta skriva lagmedlemmarna för hand i HTML. Lägg dem i en array i script.js och låt JavaScript bygga korten på sidan.",
-    hint: "var laget = [\n  { namn: \"Ada\", roll: \"Frontend\" },\n  { namn: \"Linus\", roll: \"Design\" }\n];\n\nlaget.forEach(function (person) {\n  var kort = document.createElement(\"div\");\n  kort.textContent = person.namn + \" - \" + person.roll;\n  document.querySelector(\"#laget\").appendChild(kort);\n});",
+    hint: "Lägg varje person som ett objekt i en array, med namn och roll som egenskaper.\n\nforEach går igenom arrayen ett element i taget. Inuti skapar ni ett nytt element med document.createElement() och hänger på det i sidan med appendChild().",
     proof: "Medlemmarna finns bara i arrayen i script.js, men syns som kort på sidan." },
 
   { id: "q11", cat: "roligt", points: 25, level: "Svår",
     title: "Easter egg",
     desc: "Något hemligt som händer vid en viss tangent eller ett visst klick. Bara ni vet hur man hittar det - berätta för rättarlaget.",
-    hint: "document.addEventListener(\"keydown\", function (e) {\n  if (e.key === \"k\") {\n    document.body.style.background = \"hotpink\";\n  }\n});",
+    hint: "Lyssna efter keydown på document. Funktionen får ett event-objekt, och där finns egenskapen key som säger vilken tangent som trycktes.\n\nVill ni ha en hel kombination får ni spara tangenterna i ordning och jämföra med er hemliga sekvens.",
     proof: "Beskriv i README hur man utlöser det, plus en GIF som visar effekten." },
 
   { id: "q12", cat: "roligt", points: 30, level: "Svår",
     title: "Konfetti vid klick",
     desc: "Skapa konfetti som regnar över sidan när man klickar på något. Elementen ska skapas med JavaScript, inte ligga färdiga i HTML.",
-    hint: "function konfetti() {\n  var bit = document.createElement(\"div\");\n  bit.className = \"bit\";\n  bit.style.left = Math.random() * 100 + \"vw\";\n  document.body.appendChild(bit);\n  setTimeout(function () { bit.remove(); }, 2000);\n}\n\nAnimera .bit nedåt med @keyframes.",
+    hint: "Skapa många små element i en loop med document.createElement(). Ge var och en en slumpad position från vänsterkanten, och låt CSS animera dem nedåt.\n\nGlöm inte städa: setTimeout som tar bort biten när animationen är klar, annars fylls sidan med tusentals element.",
     proof: "GIF eller skärminspelning som visar konfettin falla." },
 
   { id: "q13", cat: "funktion", points: 30, level: "Svår",
     title: "Nedräkning till redovisningen",
     desc: "En klocka på sidan som räknar ner till redovisningen och tickar i realtid.",
-    hint: "var mal = new Date(\"2026-09-11T15:00:00\");\n\nsetInterval(function () {\n  var kvar = mal - new Date();\n  var min = Math.floor(kvar / 60000);\n  ruta.textContent = min + \" minuter kvar\";\n}, 1000);",
+    hint: "new Date() ger tidpunkten nu, och ni kan skapa ett datum för måltiden. Två datum går att subtrahera - resultatet blir antal millisekunder emellan.\n\nsetInterval kör om er kod med jämna mellanrum. Räkna om millisekunderna till timmar, minuter och sekunder med division och Math.floor().",
     proof: "Nedräkningen syns på sidan och siffrorna ändrar sig. GIF som visar att den tickar." },
 
   { id: "q14", cat: "samarbete", points: 25, level: "Svår",
     title: "Pull request med review",
     desc: "Gör en ändring på en egen branch, öppna en pull request, låt en lagkamrat granska och godkänna, och merga sen in den.",
-    hint: "git checkout -b min-andring\n... gör ändringen ...\ngit add .\ngit commit -m \"lägger till X\"\ngit push -u origin min-andring\n\nÖppna PR:en på GitHub och be någon i laget granska.",
+    hint: "git checkout med flaggan -b skapar en ny branch och hoppar dit. Committa som vanligt, och pusha sen med -u origin och branchnamnet.\n\nResten sker på GitHub: en gul ruta med Compare and pull request dyker upp. Lägg till en lagkamrat under Reviewers.",
     proof: "Länk till en merged pull request där någon annan i laget lämnat en review." },
 
   { id: "q15", cat: "funktion", points: 35, level: "Riktigt svår",
     title: "Sidan minns er",
     desc: "Spara något i webbläsaren så att det finns kvar nästa gång sidan öppnas. Temavalet eller klickräknaren är bra kandidater.",
-    hint: "Spara:\nlocalStorage.setItem(\"tema\", \"ljus\");\n\nHämta när sidan laddas:\nvar tema = localStorage.getItem(\"tema\");\nif (tema === \"ljus\") {\n  document.body.classList.add(\"ljus\");\n}",
+    hint: "localStorage har två metoder ni behöver: en som sparar med en nyckel och ett värde, och en som hämtar tillbaka värdet för en nyckel.\n\nFällan: allt sparas som text. Sparar ni en siffra kommer den tillbaka som en sträng, och då blir plus en hopslagning istället för addition. Gör om den med Number() först.\n\nHämtningen måste ske när sidan laddas, inte vid klick.",
     proof: "Ladda om sidan och visa att valet finns kvar. GIF före och efter omladdning." },
 
   { id: "q16", cat: "funktion", points: 40, level: "Riktigt svår",
     title: "Hämta data utifrån",
     desc: "Hämta något från ett öppet API på nätet och visa det på sidan. Ett skämt, ett citat, vädret. Hantera också att det kan gå fel.",
-    hint: "fetch(\"https://api.chucknorris.io/jokes/random\")\n  .then(function (svar) { return svar.json(); })\n  .then(function (data) {\n    ruta.textContent = data.value;\n  })\n  .catch(function () {\n    ruta.textContent = \"Kunde inte hämta just nu.\";\n  });",
+    hint: "fetch() hämtar från en URL, men svaret kommer inte direkt - det kommer när det kommer. Därför kedjar man .then() efter, en gång för att packa upp svaret som JSON och en gång för att använda datan.\n\n.catch() på slutet fångar när nätet strular eller API:et ligger nere. Testa det genom att stänga av wifi.\n\nÖppna API:er utan nyckel att börja med: api.chucknorris.io eller icanhazdadjoke.com. Titta först på vad de svarar innan ni skriver koden.",
     proof: "Data från API:et syns på sidan. Visa också vad som händer när anropet misslyckas." }
 ];
 
@@ -1197,13 +1230,28 @@ function levelBadge(level) {
   return el("span", "level " + LEVELS[level], level);
 }
 
+/* Ledtråden pekar ut rätt begrepp men skriver inte koden åt laget.
+   Facit ligger bakom ett eget klick och finns bara på huvudspåret - fastnar
+   ett lag där kan de inte gå vidare alls. Side quests har medvetet inget. */
 function hintBlock(task) {
+  var wrap = document.createElement("div");
+
   var box = el("details", "hint");
-  box.appendChild(el("summary", "", "Tips och kodstart"));
-  var pre = el("pre");
-  pre.appendChild(el("code", "", task.hint));
-  box.appendChild(pre);
-  return box;
+  box.appendChild(el("summary", "", "Ledtråd"));
+  box.appendChild(el("p", "hint-text", task.hint));
+  wrap.appendChild(box);
+
+  if (task.facit) {
+    var facit = el("details", "hint facit");
+    facit.appendChild(el("summary", "", "Fastnat helt? Visa facit"));
+    facit.appendChild(el("p", "facit-varning", "Försök själva först - det är där ni lär er. Facit är till för att ni inte ska stå stilla, inte för att skrivas av."));
+    var pre = el("pre");
+    pre.appendChild(el("code", "", task.facit));
+    facit.appendChild(pre);
+    wrap.appendChild(facit);
+  }
+
+  return wrap;
 }
 
 function proofBlock(task) {

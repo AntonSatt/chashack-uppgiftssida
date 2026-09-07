@@ -27,6 +27,11 @@ vara godkända för att laget ska kunna vinna. Uppgiftssidan visar ett lag som i
 Uppgifterna bor i `uppgiftssida.html` (arrayerna `MAIN` och `QUESTS`). Ändras en
 rad här ska motsvarande post i den filen ändras också.
 
+**Ledtrådar och facit:** varje uppgift har en ledtråd som pekar ut rätt begrepp
+och funktion utan att skriva koden. Huvudspåret har dessutom ett facit bakom ett
+eget klick, så att inget lag fastnar och blir stående på den obligatoriska
+kedjan. Side quests har medvetet inget facit - de ska förtjänas.
+
 ## Huvudspåret (12 steg, 145p, obligatoriskt)
 
 - [x] **1. Ta ert repo** (10p, Lätt): Forka start-repot, gör det publikt, bjud in laget som collaborators, klona ner. Bevis: repo-URL som öppnas utan inloggning, med alla under Collaborators.
