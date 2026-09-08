@@ -14,8 +14,9 @@ Deltagarna bygger en **lagsida** i sitt eget repo, från tre tomma filer
 
 - **Huvudspåret** - tolv obligatoriska steg, lätt till medel, i ordning. Slutar
   i en färdig sida på GitHub Pages. 145p.
-- **Side quests** - sexton frivilliga extrauppdrag, medel till riktigt svår, som
-  plockas längs vägen och bygger vidare på samma sida. 400p.
+- **Side quests** - trettio frivilliga extrauppdrag, medel till riktigt svår, som
+  plockas längs vägen och bygger vidare på samma sida. 750p. Medvetet fler än
+  något lag hinner, så att lagen väljer i stället för att beta av.
 
 Poängen avgör placeringen, men **alla tolv steg i huvudspåret måste vara
 godkända för att ett lag ska kunna vinna**. Topplistan märker lag som inte är

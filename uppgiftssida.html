@@ -1424,14 +1424,98 @@ var QUESTS = [
     title: "Hämta data utifrån",
     desc: "Hämta något från ett öppet API på nätet och visa det på sidan. Ett skämt, ett citat, vädret. Hantera också att det kan gå fel.",
     hint: "fetch() hämtar från en URL, men svaret kommer inte direkt - det kommer när det kommer. Därför kedjar man .then() efter, en gång för att packa upp svaret som JSON och en gång för att använda datan.\n\n.catch() på slutet fångar när nätet strular eller API:et ligger nere. Testa det genom att stänga av wifi.\n\nÖppna API:er utan nyckel att börja med: api.chucknorris.io eller icanhazdadjoke.com. Titta först på vad de svarar innan ni skriver koden.",
-    proof: "Data från API:et syns på sidan. Visa också vad som händer när anropet misslyckas." }
+    proof: "Data från API:et syns på sidan. Visa också vad som händer när anropet misslyckas." },
+  { id: "q17", cat: "tillganglighet", points: 15, level: "Medel",
+    title: "Alt-text på allt",
+    desc: "Varje bild på sidan ska ha en text som beskriver vad den föreställer, för den som inte kan se den.",
+    hint: "Attributet heter alt och sitter på img-taggen. Skriv vad som syns, inte ordet bild. En bild som bara är dekoration ska ha ett tomt alt, alltså två citattecken utan något emellan.\n\nTesta genom att tillfälligt döpa om en bildfil och ladda om sidan - då visas alt-texten i stället för bilden.",
+    proof: "Varje img-tagg i repot har ett alt-attribut, och texterna beskriver vad bilderna föreställer." },
+
+  { id: "q18", cat: "tillganglighet", points: 30, level: "Svår",
+    title: "Tangentbordet räcker",
+    desc: "Hela sidan ska gå att använda utan mus. Allt klickbart ska gå att nå med Tab, och det ska synas var man är.",
+    hint: "Tryck Tab upprepade gånger på er sida. Ordningen ska följa sidan uppifrån och ner, och markeringen ska synas hela vägen.\n\nSyns den inte har webbläsarens standardmarkering troligen stylats bort. Slå upp :focus-visible och ge den en tydlig outline. Ta aldrig bort outline utan att sätta något eget i stället.",
+    proof: "GIF där någon tabbar igenom hela sidan och markeringen syns på varje steg." },
+
+  { id: "q19", cat: "tillganglighet", points: 25, level: "Svår",
+    title: "Kontrast som håller",
+    desc: "Ljusgrå text på ljus bakgrund är vackert och oläsligt. Kontrollera att er text går att läsa och fixa det som inte håller.",
+    hint: "Riktlinjen WCAG säger minst 4.5 mot 1 mellan text och bakgrund för vanlig brödtext.\n\nHögerklicka på en text, välj Inspektera, och klicka på färgrutan bredvid color i stilpanelen. Webbläsaren räknar ut kontrasten åt er och säger rakt ut om den håller.",
+    proof: "Skärmdump från devtools som visar kontrastvärdet för er brödtext, plus en rad i README om vad ni ändrade." },
+
+  { id: "q20", cat: "styling", points: 20, level: "Medel",
+    title: "Egen typsnittskombination",
+    desc: "Byt ut standardtypsnittet mot två egna: ett med karaktär till rubrikerna och ett lugnt till brödtexten.",
+    hint: "Google Fonts är gratis och kopplas in med en link-tagg i head, precis som er stilmall.\n\nSätt sedan font-family på h1 respektive body. Håll er till två typsnitt - fler blir nästan alltid rörigt.",
+    proof: "Två typsnitt inkopplade och använda på olika element. Skärmdump på sidan." },
+
+  { id: "q21", cat: "styling", points: 20, level: "Medel",
+    title: "Kort med djup",
+    desc: "Lyft något på sidan från platt text till ett kort som ser ut att ligga ovanpå bakgrunden.",
+    hint: "box-shadow tar fyra värden: hur långt åt sidan, hur långt ner, hur mjuk skuggan är, och färgen.\n\nHåll den svag. En skugga man tydligt lägger märke till ser oftast billig ut - det ska kännas som djup, inte som en ram. Kombinera med border-radius och padding.",
+    proof: "Minst ett kort på sidan med skugga och rundade hörn. Skärmdump." },
+
+  { id: "q22", cat: "styling", points: 30, level: "Svår",
+    title: "Grid-galleri",
+    desc: "Lägg era bilder i ett rutnät som själv lägger om sig när fönstret blir smalare.",
+    hint: "display: grid på behållaren, sen grid-template-columns för kolumnerna.\n\nKombinationen repeat med auto-fit och minmax låter antalet kolumner anpassa sig efter bredden helt utan media queries. Slå upp just den kombinationen - den är värd att kunna.",
+    proof: "Ett galleri som lägger om sig när fönstret smalnar. GIF eller två skärmdumpar i olika bredd." },
+
+  { id: "q23", cat: "funktion", points: 35, level: "Riktigt svår",
+    title: "Filtrera medlemmarna",
+    desc: "Ett sökfält som filtrerar listan över lagmedlemmar medan man skriver.",
+    hint: "Lyssna på händelsen input på fältet - den körs vid varje tangenttryck, till skillnad från change.\n\nJämför i gemener åt båda håll med toLowerCase, annars matchar inte Ada mot ada. includes säger om en text innehåller en annan. Göm det som inte matchar med style.display.\n\nBetydligt enklare om ni gjort Medlemskort ur en array först.",
+    proof: "GIF där någon skriver i fältet och listan smalnar av live." },
+
+  { id: "q24", cat: "funktion", points: 30, level: "Svår",
+    title: "Formulär med validering",
+    desc: "Ett kontaktformulär som säger ifrån när något saknas, i stället för att bara skicka iväg tomma fält.",
+    hint: "Ett formulär laddar om sidan när det skickas. Det stoppar ni med preventDefault på händelsen i submit-lyssnaren.\n\nKolla sedan fälten själva: tomt namn, mejladress utan snabel-a. Visa felet i ett element bredvid fältet i stället för i en alert-ruta - det är trevligare och går att läsa i lugn och ro.",
+    proof: "GIF som visar både ett felmeddelande och ett lyckat skickande. Formuläret behöver inte skicka något på riktigt." },
+
+  { id: "q25", cat: "funktion", points: 35, level: "Riktigt svår",
+    title: "Bildkarusell",
+    desc: "Bläddra mellan flera bilder med en fram- och en bakåtknapp.",
+    hint: "Håll bilderna i en array och en variabel som säger vilket index som visas just nu.\n\nNästa ökar index, föregående minskar. Tricket är att gå runt: när ni passerar sista bilden ska ni hamna på den första igen, och tvärtom. Restoperatorn % gör det på en rad om ni får till den.",
+    proof: "GIF där någon bläddrar fram och tillbaka, inklusive varvet runt från sista till första." },
+
+  { id: "q26", cat: "roligt", points: 25, level: "Svår",
+    title: "Skrivmaskinseffekt",
+    desc: "Låt en text skriva ut sig själv tecken för tecken när sidan laddas.",
+    hint: "Spara texten i en variabel och töm elementet först, annars hinner hela texten blinka till innan effekten börjar.\n\nLägg sedan till ett tecken i taget med setInterval, och stanna intervallet när ni är framme vid slutet. Ett blinkande streck efter texten gör susen, och det kan vara ren CSS.",
+    proof: "GIF där texten skriver ut sig själv." },
+
+  { id: "q27", cat: "roligt", points: 20, level: "Medel",
+    title: "Ljud vid klick",
+    desc: "Ett litet ljud när man trycker på en knapp.",
+    hint: "new Audio med en sökväg till en ljudfil ger er ett ljud, och metoden play spelar upp det. Lägg ljudfilen i repot.\n\nHåll det kort och lågt - ett klick, inte en fanfar. Webbläsare vägrar spela ljud innan användaren klickat någonstans på sidan, så koppla det till en knapp och inte till sidladdningen.",
+    proof: "Ljudfilen i repot och koden som spelar den. Skriv i README vad som låter och när." },
+
+  { id: "q28", cat: "roligt", points: 30, level: "Svår",
+    title: "Muspekaren lämnar spår",
+    desc: "Små prickar eller stjärnor som följer efter muspekaren över sidan.",
+    hint: "Lyssna på mousemove på document. Händelsen ger er clientX och clientY - var pekaren är just nu.\n\nSkapa ett litet element där med position: fixed, och ta bort det efter en stund med setTimeout. Utan den städningen fylls sidan med tusentals element och datorn blir långsam på en halv minut.",
+    proof: "GIF där spåret följer muspekaren." },
+
+  { id: "q29", cat: "samarbete", points: 15, level: "Medel",
+    title: "Allas favoritverktyg",
+    desc: "En sektion där varje person i laget lägger till ett verktyg, kortkommando eller tips de inte klarar sig utan.",
+    hint: "En rad per person: vad det är och varför. Två meningar räcker.\n\nGör det till en egen commit per person i stället för att en skriver in allas. Då syns det i historiken vem som bidrog med vad - och alla får röra koden.",
+    proof: "Sektionen syns på sidan med en rad per lagmedlem, och commit-historiken visar en commit per person." },
+
+  { id: "q30", cat: "samarbete", points: 20, level: "Medel",
+    title: "Loggbok över dagen",
+    desc: "En tidslinje på sidan över vad ni byggde, i vilken ordning, och vad som gick snett på vägen.",
+    hint: "En punktlista med klockslag räcker långt. Skriv in det medan ni jobbar, inte på slutet - då minns ingen.\n\nDet roligaste att läsa är nästan alltid buggarna och missförstånden, så snåla inte med dem.",
+    proof: "En loggbokssektion på sidan med minst fem poster med klockslag." }
 ];
 
 var CATS = {
   styling:   "Styling",
   funktion:  "Funktion",
   roligt:    "Roligt",
-  samarbete: "Samarbete"
+  samarbete: "Samarbete",
+  tillganglighet: "Tillgänglighet"
 };
 
 var ALL = MAIN.concat(QUESTS);
