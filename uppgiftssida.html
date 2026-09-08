@@ -1222,15 +1222,15 @@ var LEVELS = {
 /* Huvudspåret: tomma filer -> publicerad lagsida. Obligatoriskt, i ordning. */
 var MAIN = [
   { id: "m01", points: 10, level: "Lätt",
-    title: "Ta ert repo",
+    title: "Skapa ert repo",
     desc: "Forka start-repot till laget, gör kopian publik och bjud in alla i laget som collaborators. Klona sen ner det och öppna mappen i VS Code.",
-    hint: "Fork-knappen ligger uppe till höger på GitHub. När kopian är er egen: tryck på den gröna Code-knappen och kopiera URL:en.\n\nI terminalen heter kommandot git clone, följt av URL:en ni kopierade. Sen går ni in i mappen med cd och öppnar den i VS Code.\n\nCollaborators bjuder ni in under Settings i ert eget repo.",
+    hint: "Fork-knappen ligger uppe till höger på GitHub. När kopian är er egen: tryck på den gröna Code-knappen och kopiera URL:en.\n\nI terminalen heter kommandot git clone, följt av URL:en ni kopierade. Sen öppnar ni mappen i VSCode.\n\nCollaborators bjuder ni in under Settings i ert eget repo.",
     proof: "Repo-URL som öppnas i ett privat fönster utan inloggning, med alla i laget under Collaborators." },
 
   { id: "m02", points: 10, level: "Lätt",
     title: "Sidans skelett",
-    desc: "Fyll den tomma index.html med grundstommen som varje webbsida behöver. Titeln i fliken ska vara lagets namn.",
-    hint: "Varje HTML-sida har samma grundstomme: en doctype högst upp, ett html-element runt allt, ett head med teckenkodning och titel, och ett body där innehållet hamnar.\n\nGenväg: skriv ett utropstecken i den tomma filen och tryck Tab. VS Code skriver hela stommen åt er. Sen byter ni bara ut titeln.",
+    desc: "Fyll den tomma index.html med grunden som varje webbsida behöver. Titeln i fliken ska vara lagets namn.",
+    hint: "Varje HTML-sida har samma grund: en doctype högst upp, ett html-element runt allt, ett head med teckenkodning och titel, och ett body där innehållet hamnar.\n\nGenväg: skriv ett utropstecken i den tomma filen och tryck Tab. VS Code skriver hela grunden åt er. Sen byter ni bara ut titeln.",
     proof: "index.html i repot, och lagnamnet syns i webbläsarens flik när sidan öppnas." },
 
   { id: "m03", points: 10, level: "Lätt",
@@ -1259,7 +1259,7 @@ var MAIN = [
 
   { id: "m07", points: 15, level: "Medel",
     title: "Lagets logga",
-    desc: "Gör en logga för laget, lägg bildfilen i repot och visa den på sidan. Den ska ha en alt-text som beskriver vad bilden föreställer.",
+    desc: "Gör en logga för laget, lägg bildfilen i repot och visa den på sidan. Den ska ha en alt-text som beskriver vad bilden föreställer. TIPS: Låt AI generera en logga eller designa er egen.",
     hint: "Bilder läggs in med img-taggen. Den behöver två attribut: ett som säger var filen ligger, och ett som beskriver vad bilden föreställer för den som inte kan se den.\n\nBildfilen måste ligga i samma mapp som index.html, annars hittar webbläsaren den inte. Skriv vad som syns i alt-texten, inte ordet logga.",
     proof: "Bildfilen ligger i repot, loggan syns på sidan och img-taggen har en beskrivande alt-text." },
 
@@ -1282,16 +1282,16 @@ var MAIN = [
     proof: "En publik URL som öppnas i ett privat fönster utan inloggning och visar lagets sida." },
 
   { id: "m11", points: 10, level: "Lätt",
-    title: "Alla har committat",
-    desc: "Varje person i laget ska ha gjort minst en egen commit och push. Historiken ska visa flera olika namn.",
-    hint: "Tre kommandon i tur och ordning: ett som väljer vad som ska med, ett som sparar det i historiken med ett meddelande, och ett som skickar upp det till GitHub.\n\nSlå upp git add, git commit och git push. Resultatet ser ni under fliken Commits i repot.",
-    proof: "Commit-historiken i repot visar commits från alla i laget." },
-
-  { id: "m12", points: 10, level: "Lätt",
     title: "README som förklarar",
     desc: "Skriv en README som berättar vilka ni är, vad sidan är, och länkar till den publicerade versionen. Det är första någon läser om ert projekt.",
     hint: "README.md skrivs i Markdown, inte HTML. Tre tecken räcker långt:\n\nEn fyrkant framför en rad gör den till rubrik. Ett bindestreck framför en rad gör den till en punkt i en lista. En länk skrivs som text inom hakparenteser följt av adressen inom vanliga parenteser.",
-    proof: "README.md i repot med lagnamn, medlemmar och en fungerande länk till den publicerade sidan." }
+    proof: "README.md i repot med lagnamn, medlemmar och en fungerande länk till den publicerade sidan." },
+
+    { id: "m12", points: 10, level: "Lätt",
+    title: "Post på LinkedIn",
+    desc: "Minst en i gruppen gör ett inlägg på LinkedIn om dagens hackathon. Inlägget måste innehålla länk till lagets publicerade Github pages sida. Tagga @ChasHack, @Chasacademy samt alla lagmedlemmar",
+    hint: "Skapa ett LinkedIn konto om ni inte redan har det (det kommer behövas framöver, trust us)",
+    proof: "Lägg till länken till ert LinkedIn post innuti README.md filen i ert Github repo." }
 ];
 
 /* Side quests: frivilliga, bygger vidare på lagsidan. */
