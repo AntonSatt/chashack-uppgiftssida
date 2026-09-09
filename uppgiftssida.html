@@ -196,8 +196,24 @@
 
   /* ---------- start ---------- */
 
-  .hero { display: flex; justify-content: center; margin-bottom: 6px; }
-  .hero img { width: min(420px, 74vw); }
+  .hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    margin-bottom: 26px;
+  }
+
+  .hero img { width: min(420px, 74vw); flex: 0 0 auto; }
+  .hero-text { flex: 1 1 34ch; min-width: 0; }
+  .hero-text .intro { margin-bottom: 0; }
+
+  @media (max-width: 760px) {
+    .hero { flex-direction: column; gap: 16px; text-align: center; }
+  }
+
+  /* Luft runt lagkortet - padding, inte margin, så det inte kollapsar mot .hero */
+  #gate-wrap { padding: 20px 0; }
 
   .intro {
     font-size: 1.06rem;
@@ -857,7 +873,7 @@
     font-weight: 700;
     color: var(--ink);
     background: var(--panel-soft);
-    border: 1px solid var(--line);
+    border: 1px solid var(--yellow);
     border-radius: 999px;
     padding: 11px 18px;
   }
@@ -1071,13 +1087,15 @@
     <section id="start">
       <div class="hero">
         <img src="sources/assets/ChasHackForRookiesLogo.svg" alt="ChasHack for rookies-logotypen: bubbelbokstäver i blått, ett rosa band och en gul kyckling som kläcks ur sitt ägg">
-      </div>
 
-      <h1>Idag bygger ni lagets egen hemsida</h1>
-      <p class="intro">Ni börjar med tre tomma filer. När dagen är slut har ni en riktig
-      webbplats om ert lag, publicerad på nätet så att vem som helst kan öppna den.
-      Huvudspåret tar er dit, steg för steg. Side quests är extrauppdrag ni plockar på
-      er längs vägen för att göra sidan snyggare, roligare och värd fler poäng.</p>
+        <div class="hero-text">
+          <h1>Idag bygger ni lagets egen hemsida</h1>
+          <p class="intro">Ni börjar med tre tomma filer. När dagen är slut har ni en riktig
+          webbplats om ert lag, publicerad på nätet så att vem som helst kan öppna den.
+          Huvudspåret tar er dit, steg för steg. Side quests är extrauppdrag ni plockar på
+          er längs vägen för att göra sidan snyggare, roligare och värd fler poäng.</p>
+        </div>
+      </div>
 
       <div id="gate-wrap"></div>
 
